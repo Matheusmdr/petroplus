@@ -7,17 +7,17 @@ const missionItems = [
   {
     title: 'MISSÃO',
     content:
-      'Ter excelência na distribuição e prestação de serviços diferenciados ao mercado automotivo e industrial brasileiro, oferecendo soluções de alta tecnologia e performance, gerando sustentabilidade para a empresa, os clientes e parceiros.',
+      'Ter a melhor rede de distribuição e prestação de serviços diferenciados do mercado automotivo e agrícola brasileiro, oferecendo produtos de alta tecnologia e performance, gerando rentabilidade para a empresa, seus clientes e parceiros.',
   },
   {
     title: 'VISÃO',
     content:
-      'Ampliar a venda de produtos e serviços de alta qualidade, nos segmentos em que atua, por meio de uma estrutura rede de distribuição.',
+      'Ampliar o mix de produtos e serviços diferenciados nos segmentos em que atua, por meio de exclusiva rede de distribuição.',
   },
   {
     title: 'VALORES',
     content:
-      'A Petroplus busca uma relação de proximidade e transparência. Comprometida com a excelência e a sustentabilidade, nossos negócios na indústria se apoiam em valores como ética, respeito e inovação contínua. Buscamos criar relações de longo prazo por meio de confiança e atender com qualidade e responsabilidade.',
+      'A Petroplus conta com uma equipe de profissionais treinados e preparados, que almeja um crescimento sustentável e orgânico no ambiente corporativoTodas as ações e objetivos traçados pela empresa tem como base princípios éticos e morais, sendo vedado qualquer tipo de transgressão neste sentido.',
   },
 ];
 

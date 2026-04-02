@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
                 </a>
                 <span className="font-thin">|</span>
                 <a href="/contato" className="hover:opacity-80">
-                  Dúvidas Frequentes
+                  Fale Conosco
                 </a>
               </div>
             </nav>

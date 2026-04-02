@@ -72,8 +72,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::resource('partner-logos', PartnerLogoController::class);
             Route::resource('banners', AdminBannerController::class);
 
-            Route::get('site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
-            Route::put('site-settings', [SiteSettingController::class, 'update'])->name('site-settings.update');
+            // Restricted Routes (Admin & Super Admin only)
+            Route::middleware('role:super_admin,admin')->group(function () {
+                Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+                Route::get('site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
+                Route::put('site-settings', [SiteSettingController::class, 'update'])->name('site-settings.update');
+            });
         }
         );
     });
