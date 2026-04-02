@@ -1,19 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence, Variants } from 'framer-motion';
+import type { Variants } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import SocialIcons from './social-icons';
+import { usePage } from '@inertiajs/react';
 
-interface SocialItem {
-  name: 'instagram' | 'facebook' | 'linkedin' | 'youtube';
-  link: string;
-}
 
-const socialData: SocialItem[] = [
-  { name: 'instagram', link: '#' },
-  { name: 'facebook', link: '#' },
-  { name: 'linkedin', link: '#' },
-  { name: 'youtube', link: '#' },
-];
 
 const menuItems = [
   { name: 'Home', href: '/' },
@@ -22,11 +14,12 @@ const menuItems = [
   { name: 'Produtos', href: '/produtos' },
   { name: 'Pacote de Valor', href: '/#pacote-de-valor' },
   { name: 'Soluções Tecnológicas', href: '/petroplay' },
-  { name: 'Trabalhe Conosco', href: '/contato' },
+  { name: 'Trabalhe Conosco', href: 'https://petroplus.vagas.solides.com.br/' },
   { name: 'Contato', href: '/contato' },
 ];
 
 function Navbar() {
+  const { socialLinks } = usePage<{ socialLinks: { name: 'instagram' | 'facebook' | 'linkedin' | 'youtube'; link: string }[] }>().props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -148,7 +141,7 @@ function Navbar() {
                 className="flex justify-center pb-10"
                 variants={itemVariants}
               >
-                <SocialIcons icons={socialData} />
+                <SocialIcons icons={socialLinks} />
               </motion.div>
             </div>
           </motion.div>

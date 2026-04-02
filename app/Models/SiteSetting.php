@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class SiteSetting extends Model
+{
+    protected $fillable = [
+        'key',
+        'value',
+    ];
+
+    /**
+     * Get a setting value by key, with optional default.
+     */
+    public static function getValue(string $key, ?string $default = null): ?string
+    {
+        $setting = static::where('key', $key)->first();
+        return $setting ? $setting->value : $default;
+    }
+
+    /**
+     * Set a setting value by key.
+     */
+    public static function setValue(string $key, ?string $value): void
+    {
+        static::updateOrCreate(['key' => $key], ['value' => $value]);
+    }
+
+    /**
+     * Get all social link settings as an array.
+     */
+    public static function getSocialLinks(): array
+    {
+        $keys = ['social_instagram', 'social_facebook', 'social_linkedin', 'social_youtube'];
+        $settings = static::whereIn('key', $keys)->pluck('value', 'key');
+
+        return [
+            ['name' => 'instagram', 'link' => $settings->get('social_instagram', '#')],
+            ['name' => 'facebook', 'link' => $settings->get('social_facebook', '#')],
+            ['name' => 'linkedin', 'link' => $settings->get('social_linkedin', '#')],
+            ['name' => 'youtube', 'link' => $settings->get('social_youtube', '#')],
+        ];
+    }
+}

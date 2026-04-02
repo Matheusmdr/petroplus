@@ -6,12 +6,13 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
+  CarouselPrevious
+  
 } from '@/components/ui/carousel';
+import type {CarouselApi} from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
-import { User, Video } from 'lucide-react';
+import { User } from 'lucide-react';
 import { motion } from 'framer-motion';
 import {
   fadeUpVariant,
@@ -21,32 +22,39 @@ import {
 } from '@/lib/animations';
 import { VideoPlayer } from '@/components/video-player';
 
-export default function Page() {
-  const logos = [
-    { name: 'BYD', url: '/logos/BYD.png' },
-    { name: 'Fiat', url: '/logos/Fiat.png' },
-    { name: 'Renault', url: '/logos/Renault.png' },
-    { name: 'Kia', url: '/logos/kia.png' },
-    { name: 'Nissan', url: '/logos/Nissan.png' },
-    { name: 'Jeep', url: '/logos/Jeep.png' },
-  ];
+interface Testimonial {
+  id: number;
+  name: string;
+  role: string | null;
+  quote: string;
+}
 
-  const testimonials = [
-    {
-      id: 1,
-      quote:
-        'A parceria com a Petroplus elevou os padrões da nossa operação de pós-venda. A qualidade dos produtos é indiscutível e o suporte técnico nos ajuda a manter a excelência em nossos serviços diariamente.',
-      name: 'Carlos Oliveira',
-      role: 'Gerente de Pós-Venda, Concessionária Fiat',
-    },
-    {
-      id: 2,
-      quote:
-        'A inovação não para na Petroplus. O sistema PetroPlay transformou a forma como lidamos com os fluxos operacionais internos, diminuindo atrasos e aumentando o nível de satisfação dos clientes.',
-      name: 'João Silva',
-      role: 'Diretor de Oficinas, Grupo BYD',
-    },
-  ];
+interface PartnerLogo {
+  id: number;
+  name: string;
+  logo: string;
+}
+
+interface Banner {
+  id: number;
+  title: string | null;
+  subtitle: string | null;
+  image_mobile: string;
+  image_desktop: string | null;
+}
+
+interface PageProps {
+  testimonials: Testimonial[];
+  partnerLogos: PartnerLogo[];
+  banner: Banner | null;
+  homeVideoUrl: string;
+}
+
+export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl }: PageProps) {
+  const logos = partnerLogos.map((pl) => ({
+    name: pl.name,
+    url: pl.logo.startsWith('http') || pl.logo.startsWith('/') ? pl.logo : `/storage/${pl.logo}`,
+  }));
 
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -66,12 +74,8 @@ export default function Page() {
 
   return (
     <SiteLayout>
-      <Head title="Welcome">
-        <link rel="preconnect" href="https://fonts.bunny.net" />
-        <link
-          href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
-          rel="stylesheet"
-        />
+      <Head title="Home">
+        <meta head-key="description" name="description" content="A Petroplus atua há mais de 30 anos no desenvolvimento de soluções químicas para os setores automotivo, agrícola e calçadista no Brasil." />
       </Head>
 
       <section className="relative flex flex-col items-center justify-center overflow-hidden">
@@ -79,7 +83,7 @@ export default function Page() {
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
-          src="/illust/home-banner.png"
+          src={banner?.image_mobile ? (banner.image_mobile.startsWith('/') ? banner.image_mobile : `/storage/${banner.image_mobile}`) : '/illust/home-banner.png'}
           alt=""
           className="w-full object-cover md:hidden"
         />
@@ -87,7 +91,7 @@ export default function Page() {
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
-          src="/illust/home-banner-desktop.png"
+          src={banner?.image_desktop ? (banner.image_desktop.startsWith('/') ? banner.image_desktop : `/storage/${banner.image_desktop}`) : '/illust/home-banner-desktop.png'}
           alt=""
           className="hidden w-full object-cover md:block md:max-h-112.5"
         />
@@ -119,7 +123,7 @@ export default function Page() {
             viewport={{ once: true, amount: 0.2 }}
             className="hidden md:block md:w-1/2"
           >
-            <VideoPlayer embedUrl="https://www.youtube.com/embed/Svs1uLk3M78" />
+            <VideoPlayer embedUrl={homeVideoUrl} />
           </motion.div>
 
           <motion.div
@@ -137,7 +141,7 @@ export default function Page() {
                 CONHEÇA A PETROPLUS
               </h2>
             </div>
-            <p className="lg: mt-2 text-xs text-petroplus-gray-700 lg:text-xl">
+            <p className="mt-2 text-xs text-petroplus-gray-700 lg:text-xl lg:leading-relaxed">
               Nossa história começou em 1994 ao se tornar detentora dos direitos
               de comercialização da marca STP em território nacional. De lá para
               cá, a empresa se diferencia por atuar com a melhor prestação de
@@ -149,7 +153,7 @@ export default function Page() {
               className="mx-auto mt-4 w-fit md:mx-0"
             >
               <Link href="/sobre">
-                <Button className="h-fit rounded-full bg-petroplus-orange px-8 py-1 text-xs font-bold text-white transition-colors hover:bg-orange-600 md:px-10 md:py-3 lg:text-xl">
+                <Button className="h-fit rounded-full bg-petroplus-orange px-8 py-1 text-xs font-bold text-white transition-colors hover:bg-orange-600 md:px-10 md:py-3 lg:text-xl lg:leading-relaxed">
                   SOBRE NÓS
                 </Button>
               </Link>
@@ -256,7 +260,7 @@ export default function Page() {
             className="mt-4 h-auto max-w-40 drop-shadow-xl md:mx-auto lg:max-w-3xs"
           />
           <div className="mt-6">
-            <ul className="flex list-disc flex-col justify-center gap-2 pl-4 text-center text-[11px] font-medium text-white md:pl-0 lg:items-center lg:text-xl lg:font-normal">
+            <ul className="flex list-disc flex-col justify-center gap-2 pl-4 text-center text-[11px] font-medium text-white md:pl-0 lg:items-center lg:text-xl lg:leading-relaxed lg:font-normal">
               <li className="w-fit">
                 Rede de distribuição e unidade fabril própria
               </li>
@@ -268,7 +272,7 @@ export default function Page() {
         </motion.div>
       </section>
 
-      <section className="id='pacote-de-valor' overflow-hidden bg-white py-12 md:py-20">
+      <section id="pacote-de-valor" className="overflow-hidden bg-white py-12 md:py-20">
         <div className="mx-auto flex flex-col gap-6 space-y-2 md:flex-row md:items-center md:gap-20 md:space-y-0 lg:w-[90%]">
           <motion.div
             variants={fadeRightVariant}
@@ -285,7 +289,7 @@ export default function Page() {
                 PACOTE DE VALOR
               </h2>
             </div>
-            <p className="mx-auto mt-2 w-[80%] text-xs text-petroplus-gray-700 md:mx-0 md:w-full md:text-base md:leading-relaxed lg:text-xl">
+            <p className="mx-auto mt-2 w-[80%] text-xs text-petroplus-gray-700 md:mx-0 md:w-full md:text-base md:leading-relaxed lg:text-xl lg:leading-relaxed">
               <strong className="text-petroplus-gray-900 font-bold">
                 Acreditamos que o sucesso dos nossos clientes é o nosso maior
                 resultado.
@@ -303,7 +307,7 @@ export default function Page() {
               className="mx-auto mt-4 w-fit md:mx-0"
             >
               <Link href="/sobre">
-                <Button className="h-fit rounded-full bg-petroplus-orange px-8 py-2 text-xs font-bold text-white hover:bg-orange-600 md:px-10 md:py-3 lg:text-xl">
+                <Button className="h-fit rounded-full bg-petroplus-orange px-8 py-2 text-xs font-bold text-white hover:bg-orange-600 md:px-10 md:py-3 lg:text-xl lg:leading-relaxed">
                   SAIBA MAIS
                 </Button>
               </Link>
@@ -355,26 +359,30 @@ export default function Page() {
               <CarouselContent>
                 {testimonials.map((item) => (
                   <CarouselItem key={item.id}>
-                    <div className="relative mx-1 mt-12 rounded-[24px] bg-white px-8 pt-16 pb-10 text-center shadow-xl">
-                      <div className="absolute -top-12 left-1/2 flex h-24 w-24 -translate-x-1/2 items-end justify-center overflow-hidden rounded-full border-[6px] border-petroplus-gray-100 bg-petroplus-orange">
-                        <User className="-mb-2 h-16 w-16 text-white" />
+                    <div className="relative mx-1 mt-12 mb-4 rounded-[24px] bg-[#e6e6e6] px-6 pt-16 pb-8">
+                      <div className="absolute -top-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-end justify-center overflow-hidden rounded-full bg-black">
+                        <User
+                          className="h-16 w-16 text-white translate-y-2"
+                          fill="currentColor"
+                        />
                       </div>
 
-                      <div className="relative mb-8 inline-block text-justify text-[11px] leading-relaxed font-medium text-gray-700 italic">
-                        <span className="absolute -top-3 -left-6 font-serif text-4xl font-black text-petroplus-orange opacity-40">
+                      <div className="relative text-left text-[11px] leading-relaxed font-medium text-gray-800">
+                        <span className="mb-2 block font-serif text-2xl font-black text-black">
                           “
                         </span>
                         {item.quote}
-                        <span className="absolute -bottom-6 ml-2 font-serif text-4xl font-black text-petroplus-orange opacity-40">
+                        <span className="float-right ml-2 mt-1 font-serif text-2xl font-black text-black">
                           ”
                         </span>
                       </div>
+                      <div className="clear-both"></div>
 
-                      <div className="mt-2 flex flex-col items-center justify-center border-t border-gray-100 pt-4">
-                        <p className="text-[11px] font-bold text-gray-900 uppercase">
+                      <div className="mt-8 flex flex-col items-center justify-center">
+                        <p className="text-[11px] font-bold text-gray-900">
                           {item.name}
                         </p>
-                        <p className="text-[10px] font-medium text-petroplus-orange">
+                        <p className="text-[10px] font-medium text-gray-700">
                           {item.role}
                         </p>
                       </div>
@@ -402,27 +410,31 @@ export default function Page() {
                 variants={fadeUpVariant}
                 whileHover={{ y: -5 }}
                 key={item.id}
-                className="relative mt-12 rounded-[24px] bg-white px-8 pt-16 pb-10 text-center shadow-xl transition-transform duration-300 lg:px-12"
+                className="relative mt-12 rounded-[24px] bg-[#e6e6e6] px-8 pt-16 pb-10 shadow-sm transition-transform duration-300 lg:px-12"
               >
-                <div className="absolute -top-12 left-1/2 flex h-24 w-24 -translate-x-1/2 items-end justify-center overflow-hidden rounded-full border-[6px] border-petroplus-gray-100 bg-petroplus-orange shadow-inner">
-                  <User className="-mb-2 h-16 w-16 text-white" />
+                <div className="absolute -top-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-end justify-center overflow-hidden rounded-full bg-black shadow-inner">
+                  <User
+                    className="h-16 w-16 text-white translate-y-2"
+                    fill="currentColor"
+                  />
                 </div>
 
-                <div className="relative mt-2 mb-8 inline-block text-center text-base leading-relaxed font-medium text-gray-700 italic">
-                  <span className="absolute -top-3 -left-8 font-serif text-4xl font-black text-petroplus-orange opacity-40">
+                <div className="relative text-left text-sm leading-relaxed font-medium text-gray-800 lg:text-base lg:leading-relaxed">
+                  <span className="mb-3 block font-serif text-3xl font-black text-black">
                     “
                   </span>
                   {item.quote}
-                  <span className="absolute -bottom-6 ml-2 font-serif text-4xl font-black text-petroplus-orange opacity-40">
+                  <span className="float-right ml-2 mt-2 font-serif text-3xl font-black text-black">
                     ”
                   </span>
                 </div>
+                <div className="clear-both"></div>
 
-                <div className="mt-2 flex flex-col items-center justify-center border-t border-gray-100 pt-6">
-                  <p className="text-base font-bold text-gray-900 uppercase">
+                <div className="mt-8 flex flex-col items-start justify-start">
+                  <p className="text-sm font-bold text-gray-900 lg:text-base">
                     {item.name}
                   </p>
-                  <p className="mt-1 text-base font-medium text-petroplus-orange">
+                  <p className="text-xs font-medium text-gray-700 lg:text-sm">
                     {item.role}
                   </p>
                 </div>

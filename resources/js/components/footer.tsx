@@ -1,13 +1,12 @@
 import React from 'react';
 import SocialIcons from './social-icons';
+import { usePage } from '@inertiajs/react';
 
 const Footer: React.FC = () => {
-  const socialData = [
-    { name: 'instagram' as const, link: 'https://instagram.com' },
-    { name: 'facebook' as const, link: 'https://facebook.com' },
-    { name: 'linkedin' as const, link: 'https://linkedin.com' },
-    { name: 'youtube' as const, link: 'https://youtube.com' },
-  ];
+  const { socialLinks, sacPhone } = usePage<{
+    socialLinks: { name: 'instagram' | 'facebook' | 'linkedin' | 'youtube'; link: string }[];
+    sacPhone: string;
+  }>().props;
 
   const imgPath = '/illust';
 
@@ -27,7 +26,7 @@ const Footer: React.FC = () => {
                   Home
                 </a>
                 <span className="font-thin">|</span>
-                <a href="/a-petroplus" className="hover:opacity-80">
+                <a href="/sobre" className="hover:opacity-80">
                   A Petroplus
                 </a>
                 <span className="font-thin">|</span>
@@ -40,17 +39,20 @@ const Footer: React.FC = () => {
                   Produtos
                 </a>
                 <span className="font-thin">|</span>
-                <a href="/trabalhe-conosco" className="hover:opacity-80">
+                <a
+                  href="https://petroplus.vagas.solides.com.br/"
+                  className="hover:opacity-80"
+                >
                   Trabalhe Conosco
                 </a>
                 <span className="font-thin">|</span>
-                <a href="/faq" className="hover:opacity-80">
+                <a href="/contato" className="hover:opacity-80">
                   Dúvidas Frequentes
                 </a>
               </div>
             </nav>
             <div className="flex items-center gap-2 text-[8px] font-bold lg:text-base">
-              <span className="opacity-90">SAC:</span> 0800 580 2815
+              <span className="opacity-90">SAC:</span> {sacPhone}
             </div>
           </div>
 
@@ -84,25 +86,25 @@ const Footer: React.FC = () => {
         </div>
 
         <div className="mt-8 flex items-center justify-center gap-2 md:hidden md:justify-start">
-          <SocialIcons icons={socialData} iconsSize={16} className="gap-2" />
+          <SocialIcons icons={socialLinks} iconsSize={16} className="gap-2" />
         </div>
       </div>
 
       <div className="rl mt-8 w-[90%] border-t border-white/20 pt-6 text-center text-[10px] lg:flex lg:justify-center lg:gap-10 lg:text-base">
         <div className="hidden items-center justify-center gap-2 md:justify-start lg:flex">
-          <SocialIcons icons={socialData} iconsSize={16} className="gap-2" />
+          <SocialIcons icons={socialLinks} iconsSize={16} className="gap-2" />
         </div>
         <p className="flex flex-wrap justify-center gap-2">
           <span>© 2026 | STP/Petroplus Brasil - </span>
-          <a href="/privacidade" className="underline hover:text-gray-200">
+          <a href="/aviso-de-privacidade" className="underline hover:text-gray-200">
             Aviso de privacidade
           </a>
           <span>|</span>
-          <a href="/gestao" className="underline hover:text-gray-200">
+          <a href="/politica-sgi" className="underline hover:text-gray-200">
             Política de Sistema de Gestão Integrado
           </a>
           <span>|</span>
-          <a href="/transparencia" className="underline hover:text-gray-200">
+          <a href="#" className="underline hover:text-gray-200">
             Relatório de Transparência Salarial
           </a>
         </p>

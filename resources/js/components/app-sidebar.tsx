@@ -6,6 +6,11 @@ import {
   Tag,
   Package,
   Layers,
+  MessageSquareQuote,
+  Image,
+  ImageIcon,
+
+  Settings,
 } from 'lucide-react';
 import AppLogo from '@/components/app-logo';
 import { NavFooter } from '@/components/nav-footer';
@@ -43,6 +48,27 @@ const mainNavItems: NavItem[] = [
     title: 'Produtos',
     href: '/admin/products',
     icon: Package,
+  },
+  {
+    title: 'Depoimentos',
+    href: '/admin/testimonials',
+    icon: MessageSquareQuote,
+  },
+  {
+    title: 'Logos Parceiros',
+    href: '/admin/partner-logos',
+    icon: Image,
+  },
+  {
+    title: 'Banners',
+    href: '/admin/banners',
+    icon: ImageIcon,
+  },
+
+  {
+    title: 'Configurações',
+    href: '/admin/site-settings',
+    icon: Settings,
   },
 ];
 

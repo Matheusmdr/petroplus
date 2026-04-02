@@ -9,12 +9,20 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import { Head } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { motion } from 'framer-motion';
-import { fadeUpVariant, staggerContainer, fadeRightVariant, fadeLeftVariant } from '@/lib/animations';
+import {
+  fadeUpVariant,
+  staggerContainer,
+  fadeRightVariant,
+  fadeLeftVariant,
+} from '@/lib/animations';
+import { router } from '@inertiajs/react';
+import { useState } from 'react';
+
 
 const contatoSchema = z.object({
   nome: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres.'),
@@ -29,6 +37,9 @@ const contatoSchema = z.object({
 type ContatoFormValues = z.infer<typeof contatoSchema>;
 
 export default function Page() {
+  const { props } = usePage<{ flash?: { success?: string } }>();
+  const [submitted, setSubmitted] = useState(false);
+
   const form = useForm<ContatoFormValues>({
     resolver: zodResolver(contatoSchema),
     defaultValues: {
@@ -40,17 +51,19 @@ export default function Page() {
   });
 
   function onSubmit(data: ContatoFormValues) {
-    console.log(data);
+    router.post('/contato', data, {
+      preserveScroll: true,
+      onSuccess: () => {
+        form.reset();
+        setSubmitted(true);
+      },
+    });
   }
 
   return (
     <SiteLayout>
       <Head title="CONTATO">
-        <link rel="preconnect" href="https://fonts.bunny.net" />
-        <link
-          href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
-          rel="stylesheet"
-        />
+        <meta head-key="description" name="description" content="Entre em contato com a Petroplus. Nossa equipe está pronta para atender você e oferecer as melhores soluções automotivas, agrícolas e industriais." />
       </Head>
 
       <section className="relative flex flex-col items-center justify-center overflow-hidden">
@@ -59,40 +72,58 @@ export default function Page() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
           src="/illust/contato-banner.png"
-          alt="Contato Banner"
-          className="w-full object-cover md:h-[350px]"
+          alt="Sobre nós banner"
+          className="w-full object-cover md:hidden md:max-h-112.5"
+        />
+        <motion.img
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          src="/illust/contato-banner-desktop.png"
+          alt="Sobre nós banner"
+          className="hidden w-full object-cover md:max-h-112.5 lg:block"
         />
         <div className="absolute inset-0 bg-black/50" />
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: 'easeOut' }}
           className="absolute inset-0 mx-auto flex w-[80%] max-w-xs items-center justify-center md:max-w-none"
         >
-          <h1 className="text-xl font-bold text-white md:text-4xl text-center">
+          <h1 className="text-center text-xl font-bold text-white lg:text-5xl">
             FALE COM A <br />
             PETROPLUS
           </h1>
         </motion.div>
       </section>
 
-      <section className="bg-white py-12 md:py-16 overflow-hidden">
-        <motion.div 
+      <section className="overflow-hidden bg-white py-12 md:py-16">
+        <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="mx-auto flex w-[80%] max-w-4xl flex-col gap-2"
+          className="m mx-auto flex w-[90%] flex-col gap-2"
         >
           <motion.div variants={fadeUpVariant}>
-            <h2 className="text-xs text-petroplus-orange md:text-sm">
+            <h2 className="text-xs text-petroplus-orange lg:text-2xl">
               ENTRE EM CONTATO CONOSCO
             </h2>
-            <h2 className="font-bold text-black md:text-2xl">
+            <h2 className="font-bold text-black lg:text-3xl">
               ESTAMOS PRONTOS PARA <br className="md:hidden" />
               ATENDER VOCÊ!
             </h2>
           </motion.div>
+
+          {(submitted || props.flash?.success) && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-700"
+            >
+              ✅ {props.flash?.success || 'Mensagem enviada com sucesso! Entraremos em contato em breve.'}
+            </motion.div>
+          )}
 
           <Form {...form}>
             <form
@@ -178,26 +209,27 @@ export default function Page() {
                 />
               </motion.div>
 
-              <motion.div variants={fadeUpVariant}>
-                <Button
+              <motion.div variants={fadeUpVariant} className="w-fit">
+                <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  asChild
                 >
-                  <button type="submit" className="h-fit rounded-full bg-petroplus-orange px-8 py-2 text-xs font-bold text-white hover:bg-orange-600 md:px-12 md:py-3 md:text-sm">
+                  <Button
+                    type="submit"
+                    className="h-fit rounded-full bg-petroplus-orange px-8 py-2 text-xs font-bold text-white hover:bg-orange-600 md:px-12 md:py-3 md:text-sm"
+                  >
                     ENVIAR
-                  </button>
-                </Button>
+                  </Button>
+                </motion.div>
               </motion.div>
             </form>
           </Form>
         </motion.div>
       </section>
 
-      <section className="bg-white overflow-hidden">
-        <div className="mx-auto flex w-[80%] max-w-6xl flex-col gap-6 pb-8 md:flex-row md:gap-8">
-          {/* Escritório */}
-          <motion.div 
+      <section className="overflow-hidden bg-white">
+        <div className="mx-auto flex w-[90%] flex-col gap-6 pb-8 md:flex-row md:gap-8">
+          <motion.div
             variants={fadeRightVariant}
             initial="hidden"
             whileInView="visible"
@@ -205,10 +237,10 @@ export default function Page() {
             className="flex flex-1 flex-col gap-2"
           >
             <div>
-              <h2 className="text-xs font-bold text-petroplus-orange md:text-sm">
+              <h2 className="text-xs font-bold text-petroplus-orange lg:text-xl lg:leading-relaxed">
                 ESCRITÓRIO
               </h2>
-              <p className="text-xs text-petroplus-gray-700 md:text-sm">
+              <p className="text-xs text-petroplus-gray-700 lg:text-xl lg:leading-relaxed">
                 R. Iguatemi, 448 - Itaim Bibi, São Paulo - SP,
                 <br />
                 CEP 01453-100
@@ -225,8 +257,7 @@ export default function Page() {
             ></iframe>
           </motion.div>
 
-          {/* Fábrica */}
-          <motion.div 
+          <motion.div
             variants={fadeLeftVariant}
             initial="hidden"
             whileInView="visible"
@@ -234,8 +265,10 @@ export default function Page() {
             className="flex flex-1 flex-col gap-2"
           >
             <div>
-              <h2 className="text-xs font-bold text-petroplus-orange md:text-sm">FÁBRICA</h2>
-              <p className="text-xs text-petroplus-gray-700 md:text-sm">
+              <h2 className="text-xs font-bold text-petroplus-orange lg:text-xl lg:leading-relaxed">
+                FÁBRICA
+              </h2>
+              <p className="text-xs text-petroplus-gray-700 lg:text-xl lg:leading-relaxed">
                 Av. Jamil Nahas, 741 - Polo Industrial Oeste,
                 <br />
                 Campo Grande - MS, CEP 79108-680

@@ -2,7 +2,7 @@ import SiteLayout from '@/layouts/site-layout';
 import { Button } from '@/components/ui/button';
 import { Head, Link } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { fadeUpVariant, staggerContainer, fadeRightVariant, fadeLeftVariant } from '@/lib/animations';
+import { fadeUpVariant, staggerContainer } from '@/lib/animations';
 
 interface Category {
   id: number;
@@ -20,7 +20,6 @@ interface Props {
   categories: Category[];
 }
 
-// Default SVG icons for categories (fallback)
 const defaultIcons: Record<string, React.ReactNode> = {
   'linha-leve': (
     <svg viewBox="0 0 80 80" fill="none" className="h-16 w-16">
@@ -224,7 +223,6 @@ function CategoryIcon({ category }: { category: Category }) {
     return <>{fallback}</>;
   }
 
-  // Generic fallback
   return (
     <div className="flex h-16 w-16 items-center justify-center text-2xl font-bold text-petroplus-orange md:h-20 md:w-20">
       {category.name.charAt(0)}
@@ -236,31 +234,34 @@ export default function Page({ categories }: Props) {
   return (
     <SiteLayout>
       <Head title="Produtos">
-        <link rel="preconnect" href="https://fonts.bunny.net" />
-        <link
-          href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600"
-          rel="stylesheet"
-        />
+        <meta head-key="description" name="description" content="Navegue pela linha automotiva, agrícola e de calçadista da Petroplus. Conheça as diversas categorias de produtos e soluções de alta performance." />
       </Head>
 
-      {/* Hero Banner */}
       <section className="relative flex flex-col items-center justify-center overflow-hidden">
         <motion.img
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
-          src="/illust/marcas-banner.png"
-          alt="Nossos Produtos"
-          className="w-full object-cover md:h-[400px]"
+          src="/illust/produtos-banner.png"
+          alt="Sobre nós banner"
+          className="w-full object-cover md:hidden md:max-h-112.5"
+        />
+        <motion.img
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          src="/illust/produtos-banner-desktop.png"
+          alt="Sobre nós banner"
+          className="hidden w-full object-cover md:max-h-112.5 lg:block"
         />
         <div className="absolute inset-0 bg-black/50" />
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4, ease: 'easeOut' }}
           className="absolute inset-0 mx-auto flex w-[80%] max-w-xs items-center justify-center md:max-w-none"
         >
-          <h1 className="text-center text-xl font-bold text-white md:text-5xl">
+          <h1 className="text-center text-xl font-bold text-white lg:text-5xl">
             LINHA AUTOMOTIVA
             <br />
             AGRÍCOLA E CALÇADISTA
@@ -268,29 +269,28 @@ export default function Page({ categories }: Props) {
         </motion.div>
       </section>
 
-      {/* Categories Grid */}
-      <section className="bg-white py-12 md:py-20 overflow-hidden">
-        <div className="mx-auto flex w-[80%] max-w-6xl flex-col gap-8">
-          <motion.div 
+      <section className="overflow-hidden bg-white py-12 md:py-20">
+        <div className="mx-auto flex w-[90%] flex-col gap-8">
+          <motion.div
             variants={fadeUpVariant}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
           >
-            <h2 className="text-xs text-petroplus-orange md:text-sm">
+            <h2 className="text-xs text-petroplus-orange lg:text-2xl">
               CONHEÇA NOSSOS PRODUTOS
             </h2>
-            <h2 className="text-lg font-bold text-black md:text-2xl">
+            <h2 className="text-lg font-bold text-black lg:text-3xl">
               NOSSA LINHA COMPLETA
               <br />
               DE SOLUÇÕES
             </h2>
-            <p className="mt-2 text-xs text-petroplus-gray-700 md:text-sm">
+            <p className="mt-2 text-xs text-petroplus-gray-700 lg:text-xl lg:leading-relaxed">
               Selecione uma das linhas para mais informações:
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
@@ -303,14 +303,8 @@ export default function Page({ categories }: Props) {
                   href={`/produtos/${category.slug}`}
                   className="group flex flex-col items-center gap-3"
                 >
-                  <motion.div 
-                    whileHover={{ scale: 1.05, y: -5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="flex h-24 w-24 items-center justify-center rounded-full border-[3px] border-petroplus-orange text-petroplus-orange transition-all duration-300 group-hover:bg-petroplus-orange group-hover:text-white group-hover:shadow-lg md:h-32 md:w-32"
-                  >
-                    <CategoryIcon category={category} />
-                  </motion.div>
-                  <span className="text-center text-sm font-semibold text-petroplus-orange transition-colors group-hover:text-orange-600 md:text-base">
+                  <CategoryIcon category={category} />
+                  <span className="text-center text-sm font-semibold text-petroplus-orange transition-colors group-hover:text-orange-600 lg:text-xl lg:leading-relaxed">
                     {category.name}
                   </span>
                 </Link>
@@ -318,7 +312,7 @@ export default function Page({ categories }: Props) {
             ))}
           </motion.div>
 
-          <motion.div 
+          <motion.div
             variants={fadeUpVariant}
             initial="hidden"
             whileInView="visible"
@@ -326,8 +320,11 @@ export default function Page({ categories }: Props) {
             className="mx-auto mt-4 w-fit"
           >
             <Link href="/">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button className="h-fit rounded-full bg-petroplus-orange px-8 py-2 text-xs font-bold text-white hover:bg-orange-600 md:px-12 md:py-3 md:text-sm">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button className="h-fit rounded-full bg-petroplus-orange px-8 py-2 text-xs font-bold text-white hover:bg-orange-600 md:px-12 md:py-3 lg:text-xl lg:leading-relaxed">
                   IR PARA A HOME
                 </Button>
               </motion.div>

@@ -2,7 +2,13 @@ import { Head, Link } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
-import { Package, Layers, Tag, FileText, ArrowRight } from 'lucide-react';
+import {
+  Package,
+  Layers,
+  Tag,
+  FileText,
+  ArrowRight,
+} from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -26,11 +32,17 @@ interface Props {
     categoriesCount: number;
     brandsCount: number;
     documentsCount: number;
+    testimonialsCount: number;
+    partnerLogosCount: number;
+    bannersCount: number;
   };
   recentProducts: Product[];
 }
 
-export default function Dashboard({ stats, recentProducts }: Props) {
+export default function Dashboard({
+  stats,
+  recentProducts,
+}: Props) {
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title="Dashboard" />
@@ -47,7 +59,6 @@ export default function Dashboard({ stats, recentProducts }: Props) {
 
         {/* Stats grid */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {/* Stat Card 1 */}
           <div className="rounded-xl border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md">
             <div className="flex flex-row items-center justify-between space-y-0 p-6 pb-2">
               <h3 className="text-sm font-medium tracking-tight">
@@ -63,7 +74,6 @@ export default function Dashboard({ stats, recentProducts }: Props) {
             </div>
           </div>
 
-          {/* Stat Card 2 */}
           <div className="rounded-xl border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md">
             <div className="flex flex-row items-center justify-between space-y-0 p-6 pb-2">
               <h3 className="text-sm font-medium tracking-tight">Categorias</h3>
@@ -77,7 +87,6 @@ export default function Dashboard({ stats, recentProducts }: Props) {
             </div>
           </div>
 
-          {/* Stat Card 3 */}
           <div className="rounded-xl border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md">
             <div className="flex flex-row items-center justify-between space-y-0 p-6 pb-2">
               <h3 className="text-sm font-medium tracking-tight">Marcas</h3>
@@ -91,16 +100,19 @@ export default function Dashboard({ stats, recentProducts }: Props) {
             </div>
           </div>
 
-          {/* Stat Card 4 */}
           <div className="rounded-xl border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md">
             <div className="flex flex-row items-center justify-between space-y-0 p-6 pb-2">
-              <h3 className="text-sm font-medium tracking-tight">Documentos</h3>
+              <h3 className="text-sm font-medium tracking-tight">
+                Documentos
+              </h3>
               <FileText className="h-4 w-4 text-muted-foreground" />
             </div>
             <div className="p-6 pt-0">
-              <div className="text-2xl font-bold">{stats.documentsCount}</div>
+              <div className="text-2xl font-bold">
+                {stats.documentsCount}
+              </div>
               <p className="text-xs text-muted-foreground">
-                Manuais, fichas e FISPQs
+                Fichas técnicas cadastradas
               </p>
             </div>
           </div>
@@ -201,71 +213,76 @@ export default function Dashboard({ stats, recentProducts }: Props) {
             </div>
           </div>
 
-          {/* Quick Actions */}
-          <div className="col-span-4 rounded-xl border bg-card text-card-foreground shadow-sm lg:col-span-3">
-            <div className="border-b p-6">
-              <h3 className="leading-none font-semibold tracking-tight">
-                Ações Rápidas
-              </h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Gerencie seu conteúdo.
-              </p>
-            </div>
-            <div className="grid gap-4 p-6">
-              <Link
-                href="/admin/products/create"
-                className="group flex items-center justify-between rounded-lg border p-4 transition-colors hover:border-primary/50 hover:bg-muted/50"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 flex-col items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <Package className="h-5 w-5" />
+          {/* Quick Actions + Recent Messages */}
+          <div className="col-span-4 flex flex-col gap-4 lg:col-span-3">
+            {/* Quick Actions */}
+            <div className="rounded-xl border bg-card text-card-foreground shadow-sm">
+              <div className="border-b p-6">
+                <h3 className="leading-none font-semibold tracking-tight">
+                  Ações Rápidas
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Gerencie seu conteúdo.
+                </p>
+              </div>
+              <div className="grid gap-4 p-6">
+                <Link
+                  href="/admin/products/create"
+                  className="group flex items-center justify-between rounded-lg border p-4 transition-colors hover:border-primary/50 hover:bg-muted/50"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-10 w-10 flex-col items-center justify-center rounded-full bg-primary/10 text-primary">
+                      <Package className="h-5 w-5" />
+                    </div>
+                    <div className="flex flex-col">
+                      <h4 className="text-sm font-medium">Adicionar Produto</h4>
+                      <p className="text-xs text-muted-foreground">
+                        Criar um novo produto no catálogo
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <h4 className="text-sm font-medium">Adicionar Produto</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Criar um novo produto no catálogo
-                    </p>
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
-              </Link>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary" />
+                </Link>
 
-              <Link
-                href="/admin/categories/create"
-                className="group flex items-center justify-between rounded-lg border p-4 transition-colors hover:border-primary/50 hover:bg-muted/50"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 flex-col items-center justify-center rounded-full bg-blue-500/10 text-blue-500">
-                    <Layers className="h-5 w-5" />
+                <Link
+                  href="/admin/categories/create"
+                  className="group flex items-center justify-between rounded-lg border p-4 transition-colors hover:border-primary/50 hover:bg-muted/50"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-10 w-10 flex-col items-center justify-center rounded-full bg-blue-500/10 text-blue-500">
+                      <Layers className="h-5 w-5" />
+                    </div>
+                    <div className="flex flex-col">
+                      <h4 className="text-sm font-medium">Nova Categoria</h4>
+                      <p className="text-xs text-muted-foreground">
+                        Organize seu portfólio de produtos
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <h4 className="text-sm font-medium">Nova Categoria</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Organize seu portfólio de produtos
-                    </p>
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-blue-500" />
-              </Link>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-blue-500" />
+                </Link>
 
-              <Link
-                href="/admin/brands/create"
-                className="group flex items-center justify-between rounded-lg border p-4 transition-colors hover:border-primary/50 hover:bg-muted/50"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex h-10 w-10 flex-col items-center justify-center rounded-full bg-purple-500/10 text-purple-500">
-                    <Tag className="h-5 w-5" />
+                <Link
+                  href="/admin/brands/create"
+                  className="group flex items-center justify-between rounded-lg border p-4 transition-colors hover:border-primary/50 hover:bg-muted/50"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-10 w-10 flex-col items-center justify-center rounded-full bg-purple-500/10 text-purple-500">
+                      <Tag className="h-5 w-5" />
+                    </div>
+                    <div className="flex flex-col">
+                      <h4 className="text-sm font-medium">Adicionar Marca</h4>
+                      <p className="text-xs text-muted-foreground">
+                        Cadastrar uma nova marca parceira
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex flex-col">
-                    <h4 className="text-sm font-medium">Adicionar Marca</h4>
-                    <p className="text-xs text-muted-foreground">
-                      Cadastrar uma nova marca parceira
-                    </p>
-                  </div>
-                </div>
-                <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-purple-500" />
-              </Link>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-purple-500" />
+                </Link>
+              </div>
             </div>
+
+
           </div>
         </div>
       </div>

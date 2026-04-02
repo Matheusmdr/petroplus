@@ -13,6 +13,28 @@ export function VideoPlayer({
 }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Logic to extract YouTube ID and get default thumbnail
+  let displayThumbnail = thumbnail;
+
+  if (!displayThumbnail && embedUrl) {
+    const isYoutube =
+      embedUrl.includes('youtube.com') || embedUrl.includes('youtu.be');
+    if (isYoutube) {
+      let videoId = '';
+      if (embedUrl.includes('embed/')) {
+        videoId = embedUrl.split('embed/')[1].split('?')[0];
+      } else if (embedUrl.includes('watch?v=')) {
+        videoId = embedUrl.split('watch?v=')[1].split('&')[0];
+      } else if (embedUrl.includes('youtu.be/')) {
+        videoId = embedUrl.split('youtu.be/')[1].split('?')[0];
+      }
+
+      if (videoId) {
+        displayThumbnail = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+      }
+    }
+  }
+
   const handlePlay = () => {
     setIsPlaying(true);
   };
@@ -24,9 +46,17 @@ export function VideoPlayer({
           className="absolute inset-0 flex cursor-pointer items-center justify-center"
           onClick={handlePlay}
         >
-          {thumbnail ? (
+          {displayThumbnail ? (
             <img
-              src={thumbnail}
+              src={displayThumbnail}
+              onError={(e) => {
+                if (e.currentTarget.src.includes('maxresdefault.jpg')) {
+                  e.currentTarget.src = e.currentTarget.src.replace(
+                    'maxresdefault.jpg',
+                    'hqdefault.jpg'
+                  );
+                }
+              }}
               alt="Capa do vídeo"
               className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             />
