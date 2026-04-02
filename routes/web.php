@@ -40,7 +40,8 @@ Route::get('/produtos/{categorySlug}', [ProductController::class , 'index'])->na
 Route::get('/produtos/{categorySlug}/{productSlug}', [ProductController::class , 'show'])->name('produtos.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/admin', function () {
+    Route::redirect('/admin', '/admin/dashboard')->name('admin.home');
+    Route::get('/admin/dashboard', function () {
             return inertia('admin/dashboard', [
             'stats' => [
             'productsCount' => \App\Models\Product::count(),
@@ -58,6 +59,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             ]);
         }
         )->name('dashboard');
+
 
         // Admin routes
         Route::prefix('admin')->name('admin.')->group(function () {
