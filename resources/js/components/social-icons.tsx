@@ -1,12 +1,6 @@
 import { cn } from '@/lib/utils';
-import {
-  
-  Instagram,
-  Facebook,
-  Linkedin,
-  Youtube
-} from 'lucide-react';
-import type {LucideIcon} from 'lucide-react';
+import { Instagram, Facebook, Linkedin, Youtube } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import React from 'react';
 
 type IconName = 'instagram' | 'facebook' | 'linkedin' | 'youtube';

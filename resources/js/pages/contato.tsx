@@ -23,7 +23,6 @@ import {
 import { router } from '@inertiajs/react';
 import { useState } from 'react';
 
-
 const contatoSchema = z.object({
   nome: z.string().min(2, 'O nome deve ter pelo menos 2 caracteres.'),
   email: z.string().email('Informe um e-mail válido.'),
@@ -63,7 +62,11 @@ export default function Page() {
   return (
     <SiteLayout>
       <Head title="CONTATO">
-        <meta head-key="description" name="description" content="Entre em contato com a Petroplus. Nossa equipe está pronta para atender você e oferecer as melhores soluções automotivas, agrícolas e industriais." />
+        <meta
+          head-key="description"
+          name="description"
+          content="Entre em contato com a Petroplus. Nossa equipe está pronta para atender você e oferecer as melhores soluções automotivas, agrícolas e industriais."
+        />
       </Head>
 
       <section className="relative flex flex-col items-center justify-center overflow-hidden">
@@ -121,7 +124,9 @@ export default function Page() {
               animate={{ opacity: 1, y: 0 }}
               className="rounded-lg border border-green-200 bg-green-50 p-4 text-sm text-green-700"
             >
-              ✅ {props.flash?.success || 'Mensagem enviada com sucesso! Entraremos em contato em breve.'}
+              ✅{' '}
+              {props.flash?.success ||
+                'Mensagem enviada com sucesso! Entraremos em contato em breve.'}
             </motion.div>
           )}
 

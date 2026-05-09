@@ -62,7 +62,9 @@ export default function UsersIndex({ users }: Props) {
               <tr className="border-b bg-muted/50">
                 <th className="px-4 py-3 text-left font-medium">Nome</th>
                 <th className="px-4 py-3 text-left font-medium">Email</th>
-                <th className="px-4 py-3 text-left font-medium">Cargo (Role)</th>
+                <th className="px-4 py-3 text-left font-medium">
+                  Cargo (Role)
+                </th>
                 <th className="px-4 py-3 text-right font-medium">Ações</th>
               </tr>
             </thead>

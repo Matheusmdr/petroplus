@@ -77,7 +77,14 @@ export default function Page({ product, category }: Props) {
   return (
     <SiteLayout>
       <Head title={`${product.name} - Produtos`}>
-        <meta head-key="description" name="description" content={product.subtitle || `Detalhes do produto ${product.name} distribuído pela Petroplus. Acesse fichas técnicas, boletins e catálogos.`} />
+        <meta
+          head-key="description"
+          name="description"
+          content={
+            product.subtitle ||
+            `Detalhes do produto ${product.name} distribuído pela Petroplus. Acesse fichas técnicas, boletins e catálogos.`
+          }
+        />
       </Head>
 
       <section className="relative flex flex-col items-center justify-center overflow-hidden md:hidden">

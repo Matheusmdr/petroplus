@@ -4,14 +4,17 @@ import { usePage } from '@inertiajs/react';
 
 const Footer: React.FC = () => {
   const { socialLinks, sacPhone } = usePage<{
-    socialLinks: { name: 'instagram' | 'facebook' | 'linkedin' | 'youtube'; link: string }[];
+    socialLinks: {
+      name: 'instagram' | 'facebook' | 'linkedin' | 'youtube';
+      link: string;
+    }[];
     sacPhone: string;
   }>().props;
 
   const imgPath = '/illust';
 
   return (
-    <footer className="flex w-full flex-col items-center bg-linear-to-r from-petroplus-orange from-10% to-[#FD5B1D] px-6 py-12 font-sans text-white">
+    <footer className="animate-gradient flex w-full flex-col items-center bg-gradient-to-r from-petroplus-orange via-[#FD5B1D] to-petroplus-orange bg-[length:200%_auto] px-6 py-12 font-sans text-white">
       <div className="mx-auto w-[90%]">
         <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between lg:items-center">
           <div className="flex flex-col items-center gap-4 md:items-start">
@@ -96,7 +99,10 @@ const Footer: React.FC = () => {
         </div>
         <p className="flex flex-wrap justify-center gap-2">
           <span>© 2026 | STP/Petroplus Brasil - </span>
-          <a href="/aviso-de-privacidade" className="underline hover:text-gray-200">
+          <a
+            href="/aviso-de-privacidade"
+            className="underline hover:text-gray-200"
+          >
             Aviso de privacidade
           </a>
           <span>|</span>

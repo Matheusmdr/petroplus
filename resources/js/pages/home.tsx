@@ -6,10 +6,9 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselNext,
-  CarouselPrevious
-  
+  CarouselPrevious,
 } from '@/components/ui/carousel';
-import type {CarouselApi} from '@/components/ui/carousel';
+import type { CarouselApi } from '@/components/ui/carousel';
 import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { User } from 'lucide-react';
@@ -50,10 +49,18 @@ interface PageProps {
   homeVideoUrl: string;
 }
 
-export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl }: PageProps) {
+export default function Page({
+  testimonials,
+  partnerLogos,
+  banner,
+  homeVideoUrl,
+}: PageProps) {
   const logos = partnerLogos.map((pl) => ({
     name: pl.name,
-    url: pl.logo.startsWith('http') || pl.logo.startsWith('/') ? pl.logo : `/storage/${pl.logo}`,
+    url:
+      pl.logo.startsWith('http') || pl.logo.startsWith('/')
+        ? pl.logo
+        : `/storage/${pl.logo}`,
   }));
 
   const [api, setApi] = useState<CarouselApi>();
@@ -75,25 +82,35 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
   return (
     <SiteLayout>
       <Head title="Home">
-        <meta head-key="description" name="description" content="A Petroplus atua há mais de 30 anos no desenvolvimento de soluções químicas para os setores automotivo, agrícola e calçadista no Brasil." />
+        <meta
+          head-key="description"
+          name="description"
+          content="A Petroplus atua há mais de 30 anos no desenvolvimento de soluções químicas para os setores automotivo, agrícola e calçadista no Brasil."
+        />
       </Head>
 
-      <section className="relative flex flex-col items-center justify-center overflow-hidden">
-        <motion.img
+      <section className="relative flex h-[70vh] flex-col items-center justify-center overflow-hidden md:h-[90vh]">
+        <motion.video
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
-          src={banner?.image_mobile ? (banner.image_mobile.startsWith('/') ? banner.image_mobile : `/storage/${banner.image_mobile}`) : '/illust/home-banner.png'}
-          alt=""
-          className="w-full object-cover md:hidden"
+          src="/video-mobile.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover md:hidden"
         />
-        <motion.img
+        <motion.video
           initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: 'easeOut' }}
-          src={banner?.image_desktop ? (banner.image_desktop.startsWith('/') ? banner.image_desktop : `/storage/${banner.image_desktop}`) : '/illust/home-banner-desktop.png'}
-          alt=""
-          className="hidden w-full object-cover md:block md:max-h-112.5"
+          src="/video-desktop.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 hidden h-full w-full object-cover md:block"
         />
         <div className="absolute inset-0 bg-black/50" />
         <motion.div
@@ -103,13 +120,11 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
           className="absolute mx-auto w-[80%] max-w-xs lg:max-w-6xl"
         >
           <h1 className="text-3xl text-white lg:text-5xl">
-            SOMOS A <br />
             <strong className="font-bold">PETROPLUS</strong>
           </h1>
           <p className="mt-2 max-w-xl text-base font-medium text-white lg:text-2xl">
-            Há mais de 30 anos, atuamos como indústria química no
-            desenvolvimento de soluções para os setores automotivo, agrícola e
-            calçadista.
+            Indústria química especializada no desenvolvimento e na produção de
+            soluções para os setores automotivo, agrícola e calçadista.
           </p>
         </motion.div>
       </section>
@@ -138,15 +153,14 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
                 REFERÊNCIA EM PRODUTOS AUTOMOTIVOS
               </h2>
               <h2 className="mt-1 font-bold text-black uppercase lg:text-3xl">
-                CONHEÇA A PETROPLUS
+                MAIS DE 30 ANOS DE EXPERIÊNCIA
               </h2>
             </div>
             <p className="mt-2 text-xs text-petroplus-gray-700 lg:text-xl lg:leading-relaxed">
-              Nossa história começou em 1994 ao se tornar detentora dos direitos
-              de comercialização da marca STP em território nacional. De lá para
-              cá, a empresa se diferencia por atuar com a melhor prestação de
-              serviços do mercado, oferecendo produtos de alta tecnologia e
-              rentabilidade para seus parceiros comerciais.
+              Conheça a trajetória da Petroplus e descubra como iniciamos nossa
+              história, os marcos que construímos ao longo do caminho e os
+              passos que nos levaram a nos tornar referência em nossas áreas de
+              atuação.
             </p>
             <motion.div
               whileHover={{ scale: 1.05 }}
@@ -190,7 +204,11 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
                             <img
                               src={logo.url}
                               alt={logo.name}
-                              className="max-h-12 w-auto object-contain grayscale transition-all duration-300 hover:grayscale-0"
+                              className={cn(
+                                'max-h-12 w-auto object-contain transition-all duration-300',
+                                logo.name.toLowerCase().includes('chrysler') &&
+                                'scale-[1.8]',
+                              )}
                             />
                           </div>
                         ))}
@@ -215,32 +233,54 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
             </div>
           </div>
 
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            className="hidden md:grid md:grid-cols-6 md:items-center md:justify-items-center md:gap-8 md:px-4"
-          >
-            {logos.map((logo) => (
-              <motion.div
-                variants={fadeUpVariant}
-                whileHover={{ scale: 1.1 }}
-                key={logo.name}
-                className="flex h-24 w-full items-center justify-center"
-              >
-                <img
-                  src={logo.url}
-                  alt={logo.name}
-                  className="max-h-14 w-auto object-contain grayscale transition-all duration-300 hover:grayscale-0"
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+          {/* Desktop Infinite Scrolling Marquee */}
+          <div className="hidden py-6 md:relative md:flex md:w-full md:overflow-hidden">
+            <style>
+              {`
+                @keyframes scrollRightDesktop {
+                  0% { transform: translateX(-50%); }
+                  100% { transform: translateX(0%); }
+                }
+                .animate-scroll-right {
+                  animation: scrollRightDesktop 60s linear infinite;
+                  width: max-content;
+                }
+                .animate-scroll-right:hover {
+                  animation-play-state: paused;
+                }
+              `}
+            </style>
+
+            {/* The Before and After gradients to create a fade effect on edges */}
+            <div className="pointer-events-none absolute top-0 left-0 z-10 h-full w-24 bg-gradient-to-r from-petroplus-gray-100 to-transparent" />
+            <div className="pointer-events-none absolute top-0 right-0 z-10 h-full w-24 bg-gradient-to-l from-petroplus-gray-100 to-transparent" />
+
+            <div className="animate-scroll-right flex items-center gap-6 px-4">
+              {/* Multiplying the logos array so we have a huge seamless track */}
+              {[...logos, ...logos, ...logos, ...logos, ...logos, ...logos].map(
+                (logo, idx) => (
+                  <div
+                    key={`${logo.name}-${idx}`}
+                    className="flex h-24 w-48 shrink-0 items-center justify-center p-4 transition-transform duration-300 hover:scale-110"
+                  >
+                    <img
+                      src={logo.url}
+                      alt={logo.name}
+                      className={cn(
+                        'max-h-full max-w-full object-contain',
+                        logo.name.toLowerCase().includes('chrysler') &&
+                        'scale-[1.8]',
+                      )}
+                    />
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
         </motion.div>
       </section>
 
-      <section className="overflow-hidden bg-petroplus-orange py-12 md:py-16">
+      <section className="animate-gradient overflow-hidden bg-gradient-to-r from-petroplus-orange via-[#FD5B1D] to-petroplus-orange bg-[length:200%_auto] py-12 md:py-16">
         <motion.div
           variants={fadeUpVariant}
           initial="hidden"
@@ -253,13 +293,21 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
               NOSSOS DIFERENCIAIS
             </h2>
           </div>
+          <div>
+            <span className='text-white text-center max-w-xl mx-auto w-10/12  text-xl' >
+              Soluções químicas que impulsionam performance e confiabilidade automotiva. Com tecnologia, qualidade certificada e presença em toda a América Latina.
+            </span>
+          </div>
           <motion.img
             whileHover={{ scale: 1.05, rotate: 2 }}
             src="/illust/nossos-diferenciais.png"
             alt="nosso diferenciais"
-            className="mt-4 h-auto max-w-40 drop-shadow-xl md:mx-auto lg:max-w-3xs"
+            className="mt-4 h-auto max-w-40 drop-shadow-xl md:mx-auto lg:max-w-3xs lg:hidden"
           />
-          <div className="mt-6">
+          <div className='hidden lg:flex mt-6'>
+            <img src="/illust/diferenciais.webp" alt="nosso diferenciais" className='h-auto w-full' />
+          </div>
+          <div className="mt-6 lg:hidden">
             <ul className="flex list-disc flex-col justify-center gap-2 pl-4 text-center text-[11px] font-medium text-white md:pl-0 lg:items-center lg:text-xl lg:leading-relaxed lg:font-normal">
               <li className="w-fit">
                 Rede de distribuição e unidade fabril própria
@@ -272,7 +320,10 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
         </motion.div>
       </section>
 
-      <section id="pacote-de-valor" className="overflow-hidden bg-white py-12 md:py-20">
+      <section
+        id="pacote-de-valor"
+        className="overflow-hidden bg-white py-12 md:py-20"
+      >
         <div className="mx-auto flex flex-col gap-6 space-y-2 md:flex-row md:items-center md:gap-20 md:space-y-0 lg:w-[90%]">
           <motion.div
             variants={fadeRightVariant}
@@ -308,7 +359,7 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
             >
               <Link href="/sobre">
                 <Button className="h-fit rounded-full bg-petroplus-orange px-8 py-2 text-xs font-bold text-white hover:bg-orange-600 md:px-10 md:py-3 lg:text-xl lg:leading-relaxed">
-                  SAIBA MAIS
+                  CONHEÇA NOSSO PACOTE DE VALOR
                 </Button>
               </Link>
             </motion.div>
@@ -325,7 +376,14 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
               transition={{ duration: 0.4 }}
               src="/illust/pacote-de-valor.png"
               alt="Pacote de Valor"
-              className="pl-[10%] drop-shadow-xl md:w-full md:rounded-lg md:pl-0"
+              className="pl-[10%] drop-shadow-xl md:w-full md:rounded-lg md:pl-0 lg:hidden"
+            />
+            <motion.img
+              whileHover={{ scale: 1.02, rotate: -1 }}
+              transition={{ duration: 0.4 }}
+              src="/illust/pacote-de-valor.webp"
+              alt="Pacote de Valor"
+              className="hidden w-full lg:block"
             />
           </motion.div>
         </div>
@@ -362,7 +420,7 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
                     <div className="relative mx-1 mt-12 mb-4 rounded-[24px] bg-[#e6e6e6] px-6 pt-16 pb-8">
                       <div className="absolute -top-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-end justify-center overflow-hidden rounded-full bg-black">
                         <User
-                          className="h-16 w-16 text-white translate-y-2"
+                          className="h-16 w-16 translate-y-2 text-white"
                           fill="currentColor"
                         />
                       </div>
@@ -372,7 +430,7 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
                           “
                         </span>
                         {item.quote}
-                        <span className="float-right ml-2 mt-1 font-serif text-2xl font-black text-black">
+                        <span className="float-right mt-1 ml-2 font-serif text-2xl font-black text-black">
                           ”
                         </span>
                       </div>
@@ -414,7 +472,7 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
               >
                 <div className="absolute -top-10 left-1/2 flex h-20 w-20 -translate-x-1/2 items-end justify-center overflow-hidden rounded-full bg-black shadow-inner">
                   <User
-                    className="h-16 w-16 text-white translate-y-2"
+                    className="h-16 w-16 translate-y-2 text-white"
                     fill="currentColor"
                   />
                 </div>
@@ -424,7 +482,7 @@ export default function Page({ testimonials, partnerLogos, banner, homeVideoUrl 
                     “
                   </span>
                   {item.quote}
-                  <span className="float-right ml-2 mt-2 font-serif text-3xl font-black text-black">
+                  <span className="float-right mt-2 ml-2 font-serif text-3xl font-black text-black">
                     ”
                   </span>
                 </div>

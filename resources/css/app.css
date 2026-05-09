@@ -154,3 +154,88 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  @keyframes gradientBG {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient {
+    animation: gradientBG 6s ease infinite;
+  }
+}
+
+/* --- Mobile Typography Bump (Requested by client) --- */
+/* Excludes navbar and footer by only targeting #public-main-content */
+@media (max-width: 767px) {
+  #public-main-content p,
+  #public-main-content span,
+  #public-main-content li,
+  #public-main-content a,
+  #public-main-content div,
+  #public-main-content h1,
+  #public-main-content h2,
+  #public-main-content h3,
+  #public-main-content h4,
+  #public-main-content h5,
+  #public-main-content h6 {
+    /* Slightly increased base line-height for elements without explicit text utility classes */
+    line-height: 1.6;
+  }
+
+  /* Specific overrides for Tailwind text utility sizes used in public pages */
+  #public-main-content .text-\[10px\] {
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+  }
+  #public-main-content .text-\[11px\] {
+    font-size: 13px !important;
+    line-height: 1.6 !important;
+  }
+
+  #public-main-content .text-xs {
+    font-size: 14px !important;
+    line-height: 1.65 !important;
+  }
+  #public-main-content .text-sm {
+    font-size: 15px !important;
+    line-height: 1.65 !important;
+  }
+  #public-main-content .text-base {
+    font-size: 17px !important;
+    line-height: 1.7 !important;
+  }
+  #public-main-content .text-lg {
+    font-size: 19px !important;
+    line-height: 1.75 !important;
+  }
+  #public-main-content .text-xl {
+    font-size: 22px !important;
+    line-height: 1.75 !important;
+  }
+
+  #public-main-content .text-2xl {
+    font-size: 26px !important;
+    line-height: 1.4 !important;
+  }
+  #public-main-content .text-3xl {
+    font-size: 32px !important;
+    line-height: 1.4 !important;
+  }
+  #public-main-content .text-4xl {
+    font-size: 38px !important;
+    line-height: 1.3 !important;
+  }
+  #public-main-content .text-5xl {
+    font-size: 50px !important;
+    line-height: 1.2 !important;
+  }
+}

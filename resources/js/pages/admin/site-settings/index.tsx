@@ -52,7 +52,7 @@ export default function SiteSettingsIndex({ settings }: Props) {
         >
           {/* Social Links */}
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold border-b pb-2">
+            <h2 className="border-b pb-2 text-lg font-semibold">
               Redes Sociais
             </h2>
             <div className="grid gap-4 md:grid-cols-2">
@@ -61,9 +61,7 @@ export default function SiteSettingsIndex({ settings }: Props) {
                 <Input
                   id="social_instagram"
                   value={data.social_instagram}
-                  onChange={(e) =>
-                    setData('social_instagram', e.target.value)
-                  }
+                  onChange={(e) => setData('social_instagram', e.target.value)}
                   placeholder="https://instagram.com/petroplus"
                 />
               </div>
@@ -72,9 +70,7 @@ export default function SiteSettingsIndex({ settings }: Props) {
                 <Input
                   id="social_facebook"
                   value={data.social_facebook}
-                  onChange={(e) =>
-                    setData('social_facebook', e.target.value)
-                  }
+                  onChange={(e) => setData('social_facebook', e.target.value)}
                   placeholder="https://facebook.com/petroplus"
                 />
               </div>
@@ -83,9 +79,7 @@ export default function SiteSettingsIndex({ settings }: Props) {
                 <Input
                   id="social_linkedin"
                   value={data.social_linkedin}
-                  onChange={(e) =>
-                    setData('social_linkedin', e.target.value)
-                  }
+                  onChange={(e) => setData('social_linkedin', e.target.value)}
                   placeholder="https://linkedin.com/company/petroplus"
                 />
               </div>
@@ -94,9 +88,7 @@ export default function SiteSettingsIndex({ settings }: Props) {
                 <Input
                   id="social_youtube"
                   value={data.social_youtube}
-                  onChange={(e) =>
-                    setData('social_youtube', e.target.value)
-                  }
+                  onChange={(e) => setData('social_youtube', e.target.value)}
                   placeholder="https://youtube.com/@petroplus"
                 />
               </div>
@@ -105,9 +97,7 @@ export default function SiteSettingsIndex({ settings }: Props) {
 
           {/* Contact */}
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold border-b pb-2">
-              Contato
-            </h2>
+            <h2 className="border-b pb-2 text-lg font-semibold">Contato</h2>
             <div className="space-y-2">
               <Label htmlFor="sac_phone">Telefone SAC</Label>
               <Input
@@ -121,9 +111,7 @@ export default function SiteSettingsIndex({ settings }: Props) {
 
           {/* Videos */}
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold border-b pb-2">
-              Vídeos
-            </h2>
+            <h2 className="border-b pb-2 text-lg font-semibold">Vídeos</h2>
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="home_video_url">
@@ -132,9 +120,7 @@ export default function SiteSettingsIndex({ settings }: Props) {
                 <Input
                   id="home_video_url"
                   value={data.home_video_url}
-                  onChange={(e) =>
-                    setData('home_video_url', e.target.value)
-                  }
+                  onChange={(e) => setData('home_video_url', e.target.value)}
                   placeholder="https://www.youtube.com/embed/..."
                 />
               </div>

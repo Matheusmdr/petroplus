@@ -89,7 +89,7 @@ export default function BannersIndex({ banners }: Props) {
                       </div>
                     </td>
                     <td className="px-6 py-3">
-                      <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20 dark:bg-blue-950 dark:text-blue-300 dark:ring-blue-700/30">
+                      <span className="inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700 ring-1 ring-blue-600/20 ring-inset dark:bg-blue-950 dark:text-blue-300 dark:ring-blue-700/30">
                         {pageLabels[item.page] || item.page}
                       </span>
                     </td>
@@ -113,7 +113,11 @@ export default function BannersIndex({ banners }: Props) {
                     <td className="px-6 py-3 text-right">
                       <div className="flex justify-end gap-2">
                         <Link href={`/admin/banners/${item.id}/edit`}>
-                          <Button variant="ghost" size="icon" className="h-8 w-8">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8"
+                          >
                             <Pencil className="h-4 w-4" />
                           </Button>
                         </Link>

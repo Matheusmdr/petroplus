@@ -7,7 +7,11 @@ export default function Page() {
   return (
     <SiteLayout>
       <Head title="Política de SGI">
-        <meta head-key="description" name="description" content="A Política de Sistema de Gestão Integrado da Petroplus garante conformidade, qualidade e compromisso ambiental em todos os nossos processos logísticos e operacionais." />
+        <meta
+          head-key="description"
+          name="description"
+          content="A Política de Sistema de Gestão Integrado da Petroplus garante conformidade, qualidade e compromisso ambiental em todos os nossos processos logísticos e operacionais."
+        />
       </Head>
       <section className="relative flex flex-col items-center justify-center">
         <motion.img
@@ -33,8 +37,9 @@ export default function Page() {
           transition={{ duration: 1, delay: 0.4, ease: 'easeOut' }}
           className="absolute inset-0 mx-auto flex w-[80%] max-w-xs items-center justify-center md:max-w-none"
         >
-          <h1 className="text-center text-xl font-bold uppercase text-white lg:text-5xl">
-            Política de Sistema de<br className="md:hidden" /> Gestão Integrado
+          <h1 className="text-center text-xl font-bold text-white uppercase lg:text-5xl">
+            Política de Sistema de
+            <br className="md:hidden" /> Gestão Integrado
           </h1>
         </motion.div>
       </section>
@@ -60,16 +65,16 @@ export default function Page() {
                 aplicáveis ao negócio;
               </li>
               <li>
-                Buscar as melhores práticas para a preservação do meio ambiente e
-                prevenção da poluição, principalmente de seus aspectos e impactos
-                significativos, realizando adequadamente o descarte de resíduos
-                contaminados, tratamento dos efluentes industriais e otimização do
-                uso de recursos naturais;
+                Buscar as melhores práticas para a preservação do meio ambiente
+                e prevenção da poluição, principalmente de seus aspectos e
+                impactos significativos, realizando adequadamente o descarte de
+                resíduos contaminados, tratamento dos efluentes industriais e
+                otimização do uso de recursos naturais;
               </li>
               <li>
-                Praticar a gestão integrada com o apoio da alta direção e de todos
-                os colaboradores, para garantia de um processo dinâmico, evolutivo
-                e de melhoria contínua;
+                Praticar a gestão integrada com o apoio da alta direção e de
+                todos os colaboradores, para garantia de um processo dinâmico,
+                evolutivo e de melhoria contínua;
               </li>
               <li>
                 Engajamento no desenvolvimento dos colaboradores, estimulando o

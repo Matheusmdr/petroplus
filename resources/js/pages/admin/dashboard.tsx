@@ -2,13 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import AppLayout from '@/layouts/app-layout';
 import { dashboard } from '@/routes';
 import type { BreadcrumbItem } from '@/types';
-import {
-  Package,
-  Layers,
-  Tag,
-  FileText,
-  ArrowRight,
-} from 'lucide-react';
+import { Package, Layers, Tag, FileText, ArrowRight } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
   {
@@ -39,10 +33,7 @@ interface Props {
   recentProducts: Product[];
 }
 
-export default function Dashboard({
-  stats,
-  recentProducts,
-}: Props) {
+export default function Dashboard({ stats, recentProducts }: Props) {
   return (
     <AppLayout breadcrumbs={breadcrumbs}>
       <Head title="Dashboard" />
@@ -102,15 +93,11 @@ export default function Dashboard({
 
           <div className="rounded-xl border bg-card text-card-foreground shadow-sm transition-shadow hover:shadow-md">
             <div className="flex flex-row items-center justify-between space-y-0 p-6 pb-2">
-              <h3 className="text-sm font-medium tracking-tight">
-                Documentos
-              </h3>
+              <h3 className="text-sm font-medium tracking-tight">Documentos</h3>
               <FileText className="h-4 w-4 text-muted-foreground" />
             </div>
             <div className="p-6 pt-0">
-              <div className="text-2xl font-bold">
-                {stats.documentsCount}
-              </div>
+              <div className="text-2xl font-bold">{stats.documentsCount}</div>
               <p className="text-xs text-muted-foreground">
                 Fichas técnicas cadastradas
               </p>
@@ -281,8 +268,6 @@ export default function Dashboard({
                 </Link>
               </div>
             </div>
-
-
           </div>
         </div>
       </div>

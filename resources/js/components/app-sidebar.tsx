@@ -81,18 +81,20 @@ export function AppSidebar() {
       href: '/admin/banners',
       icon: ImageIcon,
     },
-    ...(user?.role === 'admin' || user?.role === 'super_admin' ? [
-      {
-        title: 'Usuários',
-        href: '/admin/users',
-        icon: Users,
-      },
-      {
-        title: 'Configurações',
-        href: '/admin/site-settings',
-        icon: Settings,
-      }
-    ] : []),
+    ...(user?.role === 'admin' || user?.role === 'super_admin'
+      ? [
+          {
+            title: 'Usuários',
+            href: '/admin/users',
+            icon: Users,
+          },
+          {
+            title: 'Configurações',
+            href: '/admin/site-settings',
+            icon: Settings,
+          },
+        ]
+      : []),
   ];
 
   return (

@@ -60,9 +60,9 @@ export default function UserForm({ user: editUser }: Props) {
 
         <form
           onSubmit={handleSubmit}
-          className="w-full space-y-6 rounded-lg border p-6 bg-card"
+          className="w-full space-y-6 rounded-lg border bg-card p-6"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="name">Nome *</Label>
               <Input
@@ -94,7 +94,12 @@ export default function UserForm({ user: editUser }: Props) {
 
             <div className="space-y-2">
               <Label htmlFor="password">
-                Senha {isEditing && <span className="text-muted-foreground text-xs font-normal">(Deixe em branco para não alterar)</span>}
+                Senha{' '}
+                {isEditing && (
+                  <span className="text-xs font-normal text-muted-foreground">
+                    (Deixe em branco para não alterar)
+                  </span>
+                )}
                 {!isEditing && '*'}
               </Label>
               <Input
@@ -116,7 +121,7 @@ export default function UserForm({ user: editUser }: Props) {
                 id="role"
                 value={data.role}
                 onChange={(e) => setData('role', e.target.value)}
-                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                 required
               >
                 {/* Only Super Admins can assign Super Admin role */}

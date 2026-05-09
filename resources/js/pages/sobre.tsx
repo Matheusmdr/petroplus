@@ -6,18 +6,50 @@ import { motion } from 'framer-motion';
 const missionItems = [
   {
     title: 'MISSÃO',
-    content:
-      'Ter a melhor rede de distribuição e prestação de serviços diferenciados do mercado automotivo e agrícola brasileiro, oferecendo produtos de alta tecnologia e performance, gerando rentabilidade para a empresa, seus clientes e parceiros.',
+    content: (
+      <>
+        Desenvolver, produzir e distribuir soluções químicas de alta
+        performance, garantindo qualidade, confiabilidade, inovação e tecnologia
+        contínua para produtos, motores, máquinas e sistemas, apoiando o
+        crescimento sustentável de nossos clientes e parceiros.
+      </>
+    ),
   },
   {
     title: 'VISÃO',
-    content:
-      'Ampliar o mix de produtos e serviços diferenciados nos segmentos em que atua, por meio de exclusiva rede de distribuição.',
+    content: (
+      <>
+        Ser reconhecida como referência em soluções químicas de alta
+        performance, expandindo nossa atuação com excelência técnica, parcerias
+        globais sólidas e compromisso permanente com eficiência, sustentabilidade
+        e segurança.
+      </>
+    ),
   },
   {
     title: 'VALORES',
-    content:
-      'A Petroplus conta com uma equipe de profissionais treinados e preparados, que almeja um crescimento sustentável e orgânico no ambiente corporativoTodas as ações e objetivos traçados pela empresa tem como base princípios éticos e morais, sendo vedado qualquer tipo de transgressão neste sentido.',
+    content: (
+      <div className="flex flex-col gap-1">
+        <p>
+          <strong className="font-bold">Qualidade sem concessões:</strong> compromisso absoluto com padrões técnicos rigorosos, certificações e desempenho comprovado.
+        </p>
+        <p>
+          <strong className="font-bold">Credibilidade construída no tempo:</strong> mais de três décadas de relacionamento ético e confiável com clientes, distribuidores e parceiros globais.
+        </p>
+        <p>
+          <strong className="font-bold">Inovação aplicada:</strong> pesquisa e desenvolvimento focados em soluções químicas de alta performance, eficientes e alinhadas às exigências do mercado.
+        </p>
+        <p>
+          <strong className="font-bold">Parcerias de longo prazo:</strong> valorizamos relações duradouras com nossos clientes, distribuidores e fornecedores, baseadas em confiança, transparência, respeito e resultados.
+        </p>
+        <p>
+          <strong className="font-bold">Excelência operacional:</strong> eficiência industrial, comercial, logística confiável e melhoria contínua em todos os processos.
+        </p>
+        <p>
+          <strong className="font-bold">Responsabilidade ambiental, social e governança:</strong> atuamos com responsabilidade ambiental, uso consciente de recursos e redução de impactos. Valorizamos a segurança das pessoas, o respeito às comunidades e a conformidade rigorosa com normas legais, regulatórias e de governança corporativa.
+        </p>
+      </div>
+    ),
   },
 ];
 
@@ -35,7 +67,11 @@ export default function Page() {
   return (
     <SiteLayout>
       <Head title="SOBRE NÓS">
-        <meta head-key="description" name="description" content="Nossa história começou em 1994, nos tornamos detentores dos direitos da marca STP no Brasil. Hoje, a Petroplus é referência em soluções químicas." />
+        <meta
+          head-key="description"
+          name="description"
+          content="Nossa história começou em 1994, nos tornamos detentores dos direitos da marca STP no Brasil. Hoje, a Petroplus é referência em soluções químicas."
+        />
       </Head>
       <section className="relative flex flex-col items-center justify-center">
         <motion.img
@@ -122,19 +158,20 @@ export default function Page() {
                   whileHover={{ y: -5 }}
                   className="rounded-xl bg-petroplus-orange p-2 text-center text-[10px] font-bold text-white shadow-lg transition-colors hover:bg-[#d45500] md:p-3 lg:text-xl lg:leading-relaxed"
                 >
-                  Unidade Fabril <br /> própria com <br /> 20.000 m2
+                  Unidade Fabril <br /> própria com <br /> 20.000 m²
+
                 </motion.div>
                 <motion.div
                   whileHover={{ y: -5 }}
                   className="rounded-xl bg-petroplus-orange p-2 text-center text-[10px] font-bold text-white shadow-lg transition-colors hover:bg-[#d45500] md:p-3 lg:text-xl lg:leading-relaxed"
                 >
-                  7.100 m2 <br /> de área <br /> construída
+                  7.100 m²  <br /> de área <br /> construída
                 </motion.div>
                 <motion.div
                   whileHover={{ y: -5 }}
                   className="rounded-xl bg-petroplus-orange p-2 text-center text-[10px] font-bold text-white shadow-lg transition-colors hover:bg-[#d45500] md:p-3 lg:text-xl lg:leading-relaxed"
                 >
-                  Armazém <br /> Logístico com <br /> 3.400 m2
+                  Armazém <br /> Logístico com <br /> 3.400 m²
                 </motion.div>
               </div>
             </div>
@@ -199,169 +236,319 @@ export default function Page() {
             ))}
           </div>
 
-          <div className="hidden gap-6 md:grid md:grid-cols-3">
+          <div className="hidden flex-col gap-6 md:flex">
             {missionItems.map((item, index) => (
               <motion.div
                 variants={fadeUpVariant}
-                whileHover={{
-                  y: -10,
-                  boxShadow:
-                    '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
-                }}
                 key={index}
-                className="rounded-2xl border-2 border-petroplus-orange bg-white p-6 shadow-sm transition-all duration-300 lg:p-8"
+                className="border border-petroplus-orange/40 bg-white p-6 lg:px-8 lg:py-6"
               >
-                <h3 className="mb-4 text-center text-xl font-bold text-petroplus-orange lg:text-3xl">
-                  {item.title}
-                </h3>
-                <p className="text-center text-sm leading-relaxed text-petroplus-gray-700 lg:text-xl lg:leading-relaxed">
-                  {item.content}
-                </p>
+                <button
+                  className="flex items-center gap-3 text-left"
+                  onClick={() =>
+                    setOpenAccordion(openAccordion === index ? null : index)
+                  }
+                >
+                  <span className="font-bold text-petroplus-orange text-[30px]">
+                    {item.title}
+                  </span>
+                  <svg
+                    className={`h-7 w-7 text-petroplus-orange transition-transform duration-300 ${
+                      openAccordion === index ? 'rotate-180' : ''
+                    }`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{
+                    height: openAccordion === index ? 'auto' : 0,
+                    opacity: openAccordion === index ? 1 : 0,
+                  }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-4 text-[20px] leading-relaxed text-petroplus-gray-700">
+                    {item.content}
+                  </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
         </motion.div>
       </section>
 
-      <section className="overflow-hidden bg-petroplus-gray-500 py-8 md:py-16">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="mx-auto flex w-[85%] flex-col gap-6"
-        >
-          <motion.div variants={fadeUpVariant}>
-            <h2 className="text-xs font-semibold tracking-wider text-white lg:text-2xl">
-              SUSTENTABILIDADE
-            </h2>
-            <h2 className="text-lg font-bold text-white lg:text-3xl">
-              NOSSOS SELOS
-            </h2>
+      <div className="md:hidden">
+        <section className="overflow-hidden bg-petroplus-gray-500 py-8 md:py-16">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="mx-auto flex w-[85%] flex-col gap-6"
+          >
+            <motion.div variants={fadeUpVariant}>
+              <h2 className="text-xs font-semibold tracking-wider text-white lg:text-2xl">
+                SUSTENTABILIDADE
+              </h2>
+              <h2 className="text-lg font-bold text-white lg:text-3xl">
+                NOSSOS SELOS
+              </h2>
+            </motion.div>
+
+            <div className="flex flex-col gap-6 md:gap-8">
+              <motion.div
+                variants={fadeUpVariant}
+                className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6"
+              >
+                <div className="w-[20%] flex-shrink-0 md:order-2 md:ml-auto lg:flex lg:justify-end">
+                  <motion.img
+                    whileHover={{ scale: 1.05, rotate: 2 }}
+                    src={`${imgPath}/cdp-2025.png`}
+                    alt="CDP 2025"
+                    className="h-16 lg:h-32"
+                  />
+                </div>
+                <p className="text-xs leading-relaxed text-white md:order-1 md:w-[80%] lg:text-xl lg:leading-relaxed">
+                  <strong className="font-bold">CDP:</strong> Fazemos parte de um
+                  grupo recorde de mais de 24.800 organizações que usam dados
+                  ambientais para decisões sustentáveis e transformação positiva
+                  para o planeta.
+                </p>
+              </motion.div>
+
+              <motion.div
+                variants={fadeUpVariant}
+                className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6"
+              >
+                <div className="w-[20%] flex-shrink-0 md:order-2 md:ml-auto lg:flex lg:justify-end">
+                  <motion.img
+                    whileHover={{ scale: 1.05, rotate: -2 }}
+                    src={`${imgPath}/eureciclo.png`}
+                    alt="eureciclo"
+                    className="h-16 w-auto object-contain lg:h-22"
+                  />
+                </div>
+                <p className="text-xs leading-relaxed text-white md:order-1 md:w-[80%] lg:text-xl lg:leading-relaxed">
+                  <strong className="font-bold">EU RECICLO:</strong> Parceria que
+                  viabiliza a Logística Reversa de Embalagens. Investimos na
+                  reciclagem de materiais equivalentes aos que comercializamos,
+                  fortalecendo o setor e apoiando seus trabalhadores.
+                </p>
+              </motion.div>
+
+              <motion.div
+                variants={fadeUpVariant}
+                className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6"
+              >
+                <div className="w-[20%] flex-shrink-0 md:order-2 md:ml-auto lg:flex lg:justify-end">
+                  <motion.img
+                    whileHover={{ scale: 1.05, rotate: 2 }}
+                    src={`${imgPath}/ecovadis.png`}
+                    alt="Ecovadis"
+                    className="h-16 lg:h-32"
+                  />
+                </div>
+                <p className="text-xs leading-relaxed text-white md:order-1 md:w-[80%] lg:text-xl lg:leading-relaxed">
+                  <strong className="font-bold">ECOVADIS:</strong> Somos afiliados
+                  à Ecovadis, que avalia como as empresas integram
+                  sustentabilidade aos seus negócios e gestão, promovendo
+                  transparência e responsabilidade socioambiental.
+                </p>
+              </motion.div>
+            </div>
           </motion.div>
+        </section>
 
-          <div className="flex flex-col gap-6 md:gap-8">
-            <motion.div
-              variants={fadeUpVariant}
-              className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6"
-            >
-              <div className="w-[20%] flex-shrink-0 md:order-2 md:ml-auto lg:flex lg:justify-end">
-                <motion.img
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                  src={`${imgPath}/cdp-2025.png`}
-                  alt="CDP 2025"
-                  className="h-16 lg:h-32"
-                />
-              </div>
-              <p className="text-xs leading-relaxed text-white md:order-1 md:w-[80%] lg:text-xl lg:leading-relaxed">
-                <strong className="font-bold">CDP:</strong> Fazemos parte de um
-                grupo recorde de mais de 24.800 organizações que usam dados
-                ambientais para decisões sustentáveis e transformação positiva
-                para o planeta.
-              </p>
+        <section className="overflow-hidden bg-white py-8 md:py-16">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="mx-auto flex w-[85%] flex-col gap-6"
+          >
+            <motion.div variants={fadeUpVariant}>
+              <h2 className="text-xs font-semibold tracking-wider text-petroplus-orange lg:text-2xl">
+                NOSSO COMPROMISSO
+              </h2>
+              <h2 className="text-lg font-bold text-black lg:text-3xl">
+                CERTIFICAÇÕES
+              </h2>
             </motion.div>
 
-            <motion.div
-              variants={fadeUpVariant}
-              className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6"
-            >
-              <div className="w-[20%] flex-shrink-0 md:order-2 md:ml-auto lg:flex lg:justify-end">
-                <motion.img
-                  whileHover={{ scale: 1.05, rotate: -2 }}
-                  src={`${imgPath}/eureciclo.png`}
-                  alt="eureciclo"
-                  className="h-16 w-auto object-contain lg:h-22"
-                />
-              </div>
-              <p className="text-xs leading-relaxed text-white md:order-1 md:w-[80%] lg:text-xl lg:leading-relaxed">
-                <strong className="font-bold">EU RECICLO:</strong> Parceria que
-                viabiliza a Logística Reversa de Embalagens. Investimos na
-                reciclagem de materiais equivalentes aos que comercializamos,
-                fortalecendo o setor e apoiando seus trabalhadores.
-              </p>
-            </motion.div>
+            <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-12">
+              <motion.div
+                variants={fadeRightVariant}
+                className="flex flex-col gap-4 md:flex-1"
+              >
+                <p className="text-xs leading-relaxed text-petroplus-gray-700 lg:text-xl lg:leading-relaxed">
+                  A Petroplus atua sob os padrões da ISO 9001, assegurando
+                  excelência em gestão da qualidade e foco contínuo na satisfação
+                  dos parceiros. É certificada pela ISO 14001, reforçando seu
+                  compromisso com responsabilidade ambiental e conformidade legal.
+                  Seus produtos também atendem às exigências de segurança do
+                  INMETRO, garantindo confiabilidade e desempenho dentro dos mais
+                  rigorosos padrões do mercado brasileiro.
+                </p>
+                <p className="text-xs leading-relaxed text-petroplus-gray-700 lg:text-xl lg:leading-relaxed">
+                  Mais do que certificações, esses reconhecimentos refletem o
+                  compromisso permanente da empresa com tecnologia, segurança e
+                  eficiência operacional.
+                </p>
+              </motion.div>
 
-            <motion.div
-              variants={fadeUpVariant}
-              className="flex flex-col gap-3 md:flex-row md:items-start md:gap-6"
-            >
-              <div className="w-[20%] flex-shrink-0 md:order-2 md:ml-auto lg:flex lg:justify-end">
+              <motion.div
+                variants={fadeLeftVariant}
+                className="flex flex-shrink-0 items-center gap-4 md:flex-col md:gap-6"
+              >
                 <motion.img
-                  whileHover={{ scale: 1.05, rotate: 2 }}
-                  src={`${imgPath}/ecovadis.png`}
-                  alt="Ecovadis"
-                  className="h-16 lg:h-32"
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  src={`${imgPath}/selos-iso.png`}
+                  alt="ISO 9001 e ISO 14001"
+                  className="h-12 md:h-16 lg:h-20"
                 />
-              </div>
-              <p className="text-xs leading-relaxed text-white md:order-1 md:w-[80%] lg:text-xl lg:leading-relaxed">
-                <strong className="font-bold">ECOVADIS:</strong> Somos afiliados
-                à Ecovadis, que avalia como as empresas integram
-                sustentabilidade aos seus negócios e gestão, promovendo
-                transparência e responsabilidade socioambiental.
-              </p>
-            </motion.div>
-          </div>
-        </motion.div>
-      </section>
-
-      <section className="overflow-hidden bg-white py-8 md:py-16">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="mx-auto flex w-[85%] flex-col gap-6"
-        >
-          <motion.div variants={fadeUpVariant}>
-            <h2 className="text-xs font-semibold tracking-wider text-petroplus-orange lg:text-2xl">
-              NOSSO COMPROMISSO
-            </h2>
-            <h2 className="text-lg font-bold text-black lg:text-3xl">
-              CERTIFICAÇÕES
-            </h2>
+                <motion.img
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  src={`${imgPath}/selo-seguranca.png`}
+                  alt="Segurança INMETRO"
+                  className="h-16 md:h-20 lg:h-24"
+                />
+              </motion.div>
+            </div>
           </motion.div>
+        </section>
+      </div>
 
-          <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-12">
-            <motion.div
-              variants={fadeRightVariant}
-              className="flex flex-col gap-4 md:flex-1"
-            >
-              <p className="text-xs leading-relaxed text-petroplus-gray-700 lg:text-xl lg:leading-relaxed">
-                A Petroplus atua sob os padrões da ISO 9001, assegurando
-                excelência em gestão da qualidade e foco contínuo na satisfação
-                dos parceiros. É certificada pela ISO 14001, reforçando seu
-                compromisso com responsabilidade ambiental e conformidade legal.
-                Seus produtos também atendem às exigências de segurança do
-                INMETRO, garantindo confiabilidade e desempenho dentro dos mais
-                rigorosos padrões do mercado brasileiro.
-              </p>
-              <p className="text-xs leading-relaxed text-petroplus-gray-700 lg:text-xl lg:leading-relaxed">
-                Mais do que certificações, esses reconhecimentos refletem o
-                compromisso permanente da empresa com tecnologia, segurança e
-                eficiência operacional.
-              </p>
+      <div className="hidden md:block">
+        <section className="overflow-hidden bg-white py-16">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="mx-auto flex w-[85%] flex-col items-center gap-10"
+          >
+            <motion.div variants={fadeUpVariant} className="text-center">
+              <h2 className="font-semibold tracking-wider text-petroplus-orange lg:text-xl">
+                NOSSO COMPROMISSO
+              </h2>
+              <h2 className="font-bold text-black lg:text-4xl">
+                CERTIFICAÇÕES
+              </h2>
             </motion.div>
 
             <motion.div
-              variants={fadeLeftVariant}
-              className="flex flex-shrink-0 items-center gap-4 md:flex-col md:gap-6"
+              variants={fadeUpVariant}
+              className="flex flex-row items-center justify-center gap-12"
             >
-              <motion.img
-                whileHover={{ scale: 1.05, y: -5 }}
-                src={`${imgPath}/selos-iso.png`}
-                alt="ISO 9001 e ISO 14001"
-                className="h-12 md:h-16 lg:h-20"
-              />
-              <motion.img
-                whileHover={{ scale: 1.05, y: -5 }}
+              <img
                 src={`${imgPath}/selo-seguranca.png`}
                 alt="Segurança INMETRO"
-                className="h-16 md:h-20 lg:h-24"
+                className="h-24 lg:h-32 object-contain"
+              />
+              <img
+                src={`${imgPath}/selos-iso.png`}
+                alt="ISO 9001 e ISO 14001"
+                className="h-24 lg:h-32 object-contain"
               />
             </motion.div>
-          </div>
-        </motion.div>
-      </section>
+
+            <motion.div
+              variants={fadeUpVariant}
+              className="flex w-full flex-col gap-6 text-center lg:w-[80%]"
+            >
+              <p className="text-lg leading-relaxed text-petroplus-gray-700">
+                A Petroplus atua sob os rigorosos padrões da ISO 9001, assegurando excelência na gestão da qualidade e um foco contínuo na satisfação de seus parceiros. Também é certificada pela ISO 14001, reforçando seu compromisso com a responsabilidade ambiental e o cumprimento das exigências legais.
+              </p>
+              <p className="text-lg leading-relaxed text-petroplus-gray-700">
+                Mantém-se regularmente avaliada pelo mercado junto ao INMETRO para a garantia de suas normas, atendendo integralmente às suas diretrizes de segurança, qualidade e desempenho; um diferencial que garante confiabilidade aos consumidores em meio aos padrões do mercado.
+              </p>
+              <p className="text-lg leading-relaxed text-petroplus-gray-700">
+                Mais do que certificações, esses reconhecimentos traduzem o compromisso contínuo da Petroplus com qualidade, segurança e eficiência que pautam todas as suas operações.
+              </p>
+            </motion.div>
+          </motion.div>
+        </section>
+
+        <section
+          className="overflow-hidden py-16"
+          style={{
+            backgroundImage:
+              'radial-gradient(circle at center, var(--petroplus-gray-500), var(--petroplus-gray-700))',
+          }}
+        >
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="mx-auto flex w-[85%] flex-col items-center gap-12"
+          >
+            <motion.div variants={fadeUpVariant} className="text-center">
+              <h2 className="font-semibold tracking-wider text-white lg:text-xl">
+                SUSTENTABILIDADE
+              </h2>
+              <h2 className="font-bold text-white lg:text-4xl">
+                NOSSOS SELOS
+              </h2>
+            </motion.div>
+
+            <div className="grid w-full grid-cols-3 gap-8">
+              <motion.div
+                variants={fadeUpVariant}
+                className="flex flex-col items-center rounded-[32px] border border-white/40 p-8 text-center"
+              >
+                <img
+                  src={`${imgPath}/cdp-2025.png`}
+                  alt="CDP 2025"
+                  className="mb-8 h-24 lg:h-32 object-contain"
+                />
+                <p className="text-lg leading-relaxed text-white">
+                  <strong className="font-bold">CDP:</strong> Fazemos parte de um grupo recorde de mais de 24.800 organizações que usam dados ambientais para decisões sustentáveis e transformação positiva para o planeta.
+                </p>
+              </motion.div>
+
+              <motion.div
+                variants={fadeUpVariant}
+                className="flex flex-col items-center rounded-[32px] border border-white/40 p-8 text-center"
+              >
+                <img
+                  src={`${imgPath}/eureciclo.png`}
+                  alt="eureciclo"
+                  className="mb-8 h-24 lg:h-32 object-contain"
+                />
+                <p className="text-lg leading-relaxed text-white">
+                  <strong className="font-bold">EU RECICLO:</strong> Parceria que viabiliza a Logística Reversa de Embalagens. Investimos na reciclagem de materiais equivalentes aos que comercializamos, fortalecendo o setor e apoiando seus trabalhadores.
+                </p>
+              </motion.div>
+
+              <motion.div
+                variants={fadeUpVariant}
+                className="flex flex-col items-center rounded-[32px] border border-white/40 p-8 text-center"
+              >
+                <img
+                  src={`${imgPath}/ecovadis.png`}
+                  alt="Ecovadis"
+                  className="mb-8 h-24 lg:h-32 object-contain"
+                />
+                <p className="text-lg leading-relaxed text-white">
+                  <strong className="font-bold">ECOVADIS:</strong> Somos afiliados à Ecovadis, que avalia como as empresas integram sustentabilidade aos seus negócios e gestão, promovendo transparência e responsabilidade socioambiental.
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+        </section>
+      </div>
     </SiteLayout>
   );
 }

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fadeUpVariant } from '@/lib/animations';
 import { Button } from '@/components/ui/button';
+import { ChevronRight } from 'lucide-react';
 
 interface Brand {
   id: number;
@@ -62,7 +63,11 @@ export default function Page({ category, products, brands }: Props) {
   return (
     <SiteLayout>
       <Head title={`${category.name} - Produtos`}>
-        <meta head-key="description" name="description" content={`Conheça nossa linha completa de produtos na categoria ${category.name}. Soluções de alta qualidade da Petroplus para você e sua empresa.`} />
+        <meta
+          head-key="description"
+          name="description"
+          content={`Conheça nossa linha completa de produtos na categoria ${category.name}. Soluções de alta qualidade da Petroplus para você e sua empresa.`}
+        />
       </Head>
 
       <section className="relative flex flex-col items-center justify-center overflow-hidden md:hidden">
@@ -138,7 +143,7 @@ export default function Page({ category, products, brands }: Props) {
               hidden: { opacity: 0 },
               visible: { opacity: 1, transition: { staggerChildren: 0.05 } },
             }}
-            className="grid grid-cols-3 gap-4 md:grid-cols-6 md:gap-6"
+            className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 lg:gap-6"
           >
             <AnimatePresence>
               {filteredProducts.map((product) => (
@@ -152,21 +157,31 @@ export default function Page({ category, products, brands }: Props) {
                 >
                   <Link
                     href={`/produtos/${category.slug}/${product.slug}`}
-                    className="group flex flex-col items-center gap-2"
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white p-4 transition-all hover:shadow-lg md:p-6"
                   >
-                    <div className="aspect-square w-full overflow-hidden rounded-lg">
+                    <div className="mb-4 aspect-square w-full overflow-hidden rounded-xl bg-white">
                       <img
                         src={getImageUrl(product.image)}
                         alt={product.name}
-                        className="h-full w-full object-contain transition-transform duration-300"
+                        className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-110"
                       />
                     </div>
-                    <p className="text-center text-[10px] leading-tight font-bold text-petroplus-gray-700 uppercase transition-colors group-hover:text-petroplus-orange lg:text-xl lg:leading-relaxed">
-                      {product.name}
-                    </p>
-                    <span className="hidden rounded-full bg-petroplus-orange px-4 py-1 text-[10px] font-bold text-white uppercase transition-colors group-hover:bg-orange-600 md:inline-block lg:text-base">
-                      MAIS INFORMAÇÕES
-                    </span>
+                    <div className="flex flex-1 flex-col justify-between gap-4">
+                      <p className="line-clamp-2 min-h-[3rem] text-center text-sm font-bold uppercase text-black lg:text-base">
+                        {product.name.includes(' ') ? (
+                          <>
+                            {product.name.substring(0, product.name.indexOf(' '))}
+                            <br />
+                            {product.name.substring(product.name.indexOf(' ') + 1)}
+                          </>
+                        ) : (
+                          product.name
+                        )}
+                      </p>
+                      <div className="mt-auto flex w-full items-center justify-center gap-1 rounded-full border border-petroplus-orange bg-white py-2 text-xs font-bold text-black transition-colors group-hover:bg-petroplus-orange group-hover:text-white lg:py-2.5 lg:text-sm">
+                        Saiba Mais <ChevronRight className="h-4 w-4" />
+                      </div>
+                    </div>
                   </Link>
                 </motion.div>
               ))}
@@ -190,7 +205,7 @@ export default function Page({ category, products, brands }: Props) {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="mx-auto mt-4 w-fit"
+            className="mx-auto mt-16 w-fit md:mt-24"
           >
             <Link href="/">
               <motion.div

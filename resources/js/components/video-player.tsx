@@ -53,7 +53,7 @@ export function VideoPlayer({
                 if (e.currentTarget.src.includes('maxresdefault.jpg')) {
                   e.currentTarget.src = e.currentTarget.src.replace(
                     'maxresdefault.jpg',
-                    'hqdefault.jpg'
+                    'hqdefault.jpg',
                   );
                 }
               }}

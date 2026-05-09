@@ -234,7 +234,11 @@ export default function Page({ categories }: Props) {
   return (
     <SiteLayout>
       <Head title="Produtos">
-        <meta head-key="description" name="description" content="Navegue pela linha automotiva, agrícola e de calçadista da Petroplus. Conheça as diversas categorias de produtos e soluções de alta performance." />
+        <meta
+          head-key="description"
+          name="description"
+          content="Navegue pela linha automotiva, agrícola e de calçadista da Petroplus. Conheça as diversas categorias de produtos e soluções de alta performance."
+        />
       </Head>
 
       <section className="relative flex flex-col items-center justify-center overflow-hidden">

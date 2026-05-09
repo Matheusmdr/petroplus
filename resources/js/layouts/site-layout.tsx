@@ -4,7 +4,7 @@ import Navbar from '@/components/navbar';
 export default ({ children }: { children: React.ReactNode }) => (
   <>
     <Navbar />
-    {children}
+    <main id="public-main-content">{children}</main>
     <Footer />
   </>
 );

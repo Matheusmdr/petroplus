@@ -91,7 +91,11 @@ export default function TestimonialsIndex({ testimonials }: Props) {
                     <td className="px-6 py-3 text-right">
                       <div className="flex justify-end gap-2">
                         <Link href={`/admin/testimonials/${item.id}/edit`}>
-                          <Button variant="ghost" size="icon" className="h-8 w-8">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8"
+                          >
                             <Pencil className="h-4 w-4" />
                           </Button>
                         </Link>

@@ -5,8 +5,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import SocialIcons from './social-icons';
 import { usePage } from '@inertiajs/react';
 
-
-
 const menuItems = [
   { name: 'Home', href: '/' },
   { name: 'A Petroplus', href: '/sobre' },
@@ -19,7 +17,12 @@ const menuItems = [
 ];
 
 function Navbar() {
-  const { socialLinks } = usePage<{ socialLinks: { name: 'instagram' | 'facebook' | 'linkedin' | 'youtube'; link: string }[] }>().props;
+  const { socialLinks } = usePage<{
+    socialLinks: {
+      name: 'instagram' | 'facebook' | 'linkedin' | 'youtube';
+      link: string;
+    }[];
+  }>().props;
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -52,7 +55,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="relative z-50 w-full bg-white shadow-sm lg:bg-linear-to-r lg:from-petroplus-orange lg:from-10% lg:to-[#FD5B1D] lg:shadow-none">
+    <nav className="lg:animate-gradient relative z-50 w-full bg-white shadow-sm lg:bg-gradient-to-r lg:from-petroplus-orange lg:via-[#FD5B1D] lg:to-petroplus-orange lg:bg-[length:200%_auto] lg:shadow-none">
       <div className="mx-auto flex items-center justify-between px-4 py-4 lg:w-[85%]">
         <a href="/" className="block">
           <img
@@ -67,7 +70,7 @@ function Navbar() {
           />
         </a>
 
-        <ul className="hidden gap-6 text-[11px] font-semibold text-white uppercase lg:flex lg:text-lg lg:font-medium lg:normal-case">
+        <ul className="hidden gap-6 text-[11px] font-semibold text-white uppercase lg:flex lg:text-base lg:font-medium lg:normal-case">
           {menuItems.slice(0, 6).map((item, index) => (
             <li key={item.name} className="flex items-center gap-6">
               <a
@@ -82,7 +85,12 @@ function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <span className="text-lg">🇧🇷</span>
+          <svg viewBox="0 0 640 448" className="h-5 w-auto rounded-sm shadow-sm">
+            <rect fill="#009b3a" width="640" height="448" />
+            <polygon fill="#fedf00" points="320,34 606,224 320,414 34,224" />
+            <circle fill="#002776" cx="320" cy="224" r="92" />
+            <path fill="#fff" d="M239,252 Q280,210 400,240 Q390,248 245,260 Z" />
+          </svg>
           <span className="text-xs font-semibold text-white">BR ▾</span>
         </div>
 

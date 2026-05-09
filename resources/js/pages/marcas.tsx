@@ -24,7 +24,11 @@ export default function Page({ brands }: PageProps) {
   return (
     <SiteLayout>
       <Head title="NOSSAS MARCAS">
-        <meta head-key="description" name="description" content="Conheça as marcas distribuídas pela Petroplus. Soluções e produtos certificados internacionalmente criados para garantir eficiência nos segmentos automotivo e industrial." />
+        <meta
+          head-key="description"
+          name="description"
+          content="Conheça as marcas distribuídas pela Petroplus. Soluções e produtos certificados internacionalmente criados para garantir eficiência nos segmentos automotivo e industrial."
+        />
       </Head>
       <section className="relative flex flex-col items-center justify-center overflow-hidden">
         <motion.img
