@@ -18,7 +18,7 @@ class ProductAdminController extends Controller
 {
     public function index(): Response
     {
-        $products = Product::with(['category', 'brand'])
+        $products = Product::with(['categories', 'brand'])
             ->withCount('documents')
             ->orderBy('sort_order')
             ->get();
@@ -40,7 +40,8 @@ class ProductAdminController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:product_categories,id',
+            'category_ids' => 'required|array',
+            'category_ids.*' => 'exists:product_categories,id',
             'brand_id' => 'nullable|exists:brands,id',
             'subtitle' => 'nullable|string|max:255',
             'code' => 'nullable|string|max:100',
@@ -62,7 +63,12 @@ class ProductAdminController extends Controller
         // Remove document fields from product data
         unset($validated['fispq'], $validated['ficha_tecnica']);
 
+        // Extract category_ids
+        $categoryIds = $validated['category_ids'];
+        unset($validated['category_ids']);
+
         $product = Product::create($validated);
+        $product->categories()->sync($categoryIds);
 
         // Handle FISPQ document
         if ($request->hasFile('fispq')) {
@@ -93,7 +99,7 @@ class ProductAdminController extends Controller
     public function edit(Product $product): Response
     {
         return Inertia::render('admin/products/form', [
-            'product' => $product->load('documents'),
+            'product' => $product->load('documents', 'categories'),
             'categories' => ProductCategory::where('is_active', true)->orderBy('sort_order')->get(),
             'brands' => Brand::where('is_active', true)->orderBy('sort_order')->get(),
         ]);
@@ -103,7 +109,8 @@ class ProductAdminController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'category_id' => 'required|exists:product_categories,id',
+            'category_ids' => 'required|array',
+            'category_ids.*' => 'exists:product_categories,id',
             'brand_id' => 'nullable|exists:brands,id',
             'subtitle' => 'nullable|string|max:255',
             'code' => 'nullable|string|max:100',
@@ -128,7 +135,12 @@ class ProductAdminController extends Controller
         // Remove document fields from product data
         unset($validated['fispq'], $validated['ficha_tecnica']);
 
+        // Extract category_ids
+        $categoryIds = $validated['category_ids'];
+        unset($validated['category_ids']);
+
         $product->update($validated);
+        $product->categories()->sync($categoryIds);
 
         // Handle FISPQ document
         if ($request->hasFile('fispq')) {

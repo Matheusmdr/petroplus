@@ -32,7 +32,6 @@ interface Product {
   id: number;
   name: string;
   slug: string;
-  category_id: number;
   brand_id: number | null;
   subtitle: string | null;
   code: string | null;
@@ -42,6 +41,7 @@ interface Product {
   is_active: boolean;
   sort_order: number;
   documents: ProductDocument[];
+  categories: Category[];
 }
 
 interface Props {
@@ -67,7 +67,7 @@ export default function ProductForm({ product, categories, brands }: Props) {
 
   const { data, setData, post, put, processing, errors } = useForm({
     name: product?.name || '',
-    category_id: product?.category_id || categories[0]?.id || '',
+    category_ids: product?.categories?.map(c => c.id) || (categories.length > 0 ? [categories[0].id] : []),
     brand_id: product?.brand_id || '',
     subtitle: product?.subtitle || '',
     code: product?.code || '',
@@ -164,25 +164,29 @@ export default function ProductForm({ product, categories, brands }: Props) {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="category_id">Categoria *</Label>
-                <select
-                  id="category_id"
-                  value={data.category_id}
-                  onChange={(e) =>
-                    setData('category_id', parseInt(e.target.value))
-                  }
-                  className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none"
-                  required
-                >
-                  <option value="">Selecione...</option>
+                <Label>Categorias *</Label>
+                <div className="flex flex-col gap-2 rounded-md border border-input p-3 shadow-xs">
                   {categories.map((cat) => (
-                    <option key={cat.id} value={cat.id}>
-                      {cat.name}
-                    </option>
+                    <div key={cat.id} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`category_${cat.id}`}
+                        checked={data.category_ids.includes(cat.id)}
+                        onCheckedChange={(checked) => {
+                          if (checked) {
+                            setData('category_ids', [...data.category_ids, cat.id]);
+                          } else {
+                            setData('category_ids', data.category_ids.filter(id => id !== cat.id));
+                          }
+                        }}
+                      />
+                      <Label htmlFor={`category_${cat.id}`} className="cursor-pointer font-normal">
+                        {cat.name}
+                      </Label>
+                    </div>
                   ))}
-                </select>
-                {errors.category_id && (
-                  <p className="text-sm text-red-500">{errors.category_id}</p>
+                </div>
+                {errors.category_ids && (
+                  <p className="text-sm text-red-500">{errors.category_ids}</p>
                 )}
               </div>
 

@@ -21,7 +21,7 @@ interface Product {
   image: string | null;
   is_active: boolean;
   sort_order: number;
-  category: Category | null;
+  categories: Category[];
   brand: Brand | null;
   documents_count: number;
 }
@@ -104,7 +104,9 @@ export default function ProductsIndex({ products }: Props) {
                     </td>
                     <td className="px-4 py-3 font-medium">{product.name}</td>
                     <td className="px-4 py-3 text-muted-foreground">
-                      {product.category?.name || '—'}
+                      {product.categories && product.categories.length > 0
+                        ? product.categories.map(c => c.name).join(', ')
+                        : '—'}
                     </td>
                     <td className="px-4 py-3 text-muted-foreground">
                       {product.brand?.name || '—'}

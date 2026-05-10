@@ -16,7 +16,7 @@ interface Product {
   name: string;
   image: string | null;
   is_active: boolean;
-  category: { name: string } | null;
+  categories: { name: string }[];
   brand: { name: string } | null;
 }
 
@@ -169,7 +169,9 @@ export default function Dashboard({ stats, recentProducts }: Props) {
                             </span>
                           </td>
                           <td className="px-6 py-3 text-muted-foreground">
-                            {product.category?.name || '—'}
+                            {product.categories && product.categories.length > 0
+                              ? product.categories.map((c) => c.name).join(', ')
+                              : '—'}
                           </td>
                           <td className="px-6 py-3">
                             <span

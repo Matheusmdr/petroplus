@@ -16,6 +16,7 @@ interface Category {
   slug: string;
   icon: string | null;
   banner_image: string | null;
+  background_image: string | null;
   banner_title: string | null;
   banner_subtitle: string | null;
   description: string | null;
@@ -40,6 +41,7 @@ export default function CategoryForm({ category }: Props) {
     name: category?.name || '',
     icon: null as File | null,
     banner_image: null as File | null,
+    background_image: null as File | null,
     banner_title: category?.banner_title || '',
     banner_subtitle: category?.banner_subtitle || '',
     description: category?.description || '',
@@ -128,6 +130,22 @@ export default function CategoryForm({ category }: Props) {
             />
             {errors.banner_image && (
               <p className="text-sm text-red-500">{errors.banner_image}</p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label>Imagem de Fundo do Card (Desktop)</Label>
+            <ImageUpload
+              value={category?.background_image}
+              onChange={(file) => setData('background_image', file)}
+              aspectRatio={16 / 9}
+              disableCrop={true}
+              label="Selecionar imagem de fundo"
+              previewClassName="h-32 w-full object-cover rounded-xl"
+              maxSize={2}
+            />
+            {errors.background_image && (
+              <p className="text-sm text-red-500">{errors.background_image}</p>
             )}
           </div>
 

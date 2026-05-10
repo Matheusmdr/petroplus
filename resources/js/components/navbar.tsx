@@ -10,7 +10,7 @@ const menuItems = [
   { name: 'A Petroplus', href: '/sobre' },
   { name: 'Nossas Marcas', href: '/marcas' },
   { name: 'Produtos', href: '/produtos' },
-  { name: 'Pacote de Valor', href: '/#pacote-de-valor' },
+  { name: 'Pacote de Valor', href: '/pacote-de-valor' },
   { name: 'Soluções Tecnológicas', href: '/petroplay' },
   { name: 'Trabalhe Conosco', href: 'https://petroplus.vagas.solides.com.br/' },
   { name: 'Contato', href: '/contato' },

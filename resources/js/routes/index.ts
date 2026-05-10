@@ -530,6 +530,87 @@ marcas.form = marcasForm
 /**
 * @see \Inertia\Controller::__invoke
 * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+export const pacoteDeValor = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: pacoteDeValor.url(options),
+    method: 'get',
+})
+
+pacoteDeValor.definition = {
+    methods: ["get","head"],
+    url: '/pacote-de-valor',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+pacoteDeValor.url = (options?: RouteQueryOptions) => {
+    return pacoteDeValor.definition.url + queryParams(options)
+}
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+pacoteDeValor.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: pacoteDeValor.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+pacoteDeValor.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: pacoteDeValor.url(options),
+    method: 'head',
+})
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+const pacoteDeValorForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: pacoteDeValor.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+pacoteDeValorForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: pacoteDeValor.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+pacoteDeValorForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: pacoteDeValor.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+pacoteDeValor.form = pacoteDeValorForm
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
 * @route '/aviso-de-privacidade'
 */
 export const privacidade = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -690,7 +771,7 @@ politicasgiForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'>
 politicasgi.form = politicasgiForm
 
 /**
-* @see routes/web.php:44
+* @see routes/web.php:45
 * @route '/admin/dashboard'
 */
 export const dashboard = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -704,7 +785,7 @@ dashboard.definition = {
 } satisfies RouteDefinition<["get","head"]>
 
 /**
-* @see routes/web.php:44
+* @see routes/web.php:45
 * @route '/admin/dashboard'
 */
 dashboard.url = (options?: RouteQueryOptions) => {
@@ -712,7 +793,7 @@ dashboard.url = (options?: RouteQueryOptions) => {
 }
 
 /**
-* @see routes/web.php:44
+* @see routes/web.php:45
 * @route '/admin/dashboard'
 */
 dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -721,7 +802,7 @@ dashboard.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 })
 
 /**
-* @see routes/web.php:44
+* @see routes/web.php:45
 * @route '/admin/dashboard'
 */
 dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -730,7 +811,7 @@ dashboard.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 })
 
 /**
-* @see routes/web.php:44
+* @see routes/web.php:45
 * @route '/admin/dashboard'
 */
 const dashboardForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -739,7 +820,7 @@ const dashboardForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> 
 })
 
 /**
-* @see routes/web.php:44
+* @see routes/web.php:45
 * @route '/admin/dashboard'
 */
 dashboardForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -748,7 +829,7 @@ dashboardForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =>
 })
 
 /**
-* @see routes/web.php:44
+* @see routes/web.php:45
 * @route '/admin/dashboard'
 */
 dashboardForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({

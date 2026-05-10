@@ -32,6 +32,7 @@ Route::get('/marcas', function () {
     ]);
 })->name('marcas');
 
+Route::inertia('/pacote-de-valor', 'pacote-de-valor')->name('pacote-de-valor');
 Route::inertia('/aviso-de-privacidade', 'aviso-de-privacidade')->name('privacidade');
 Route::inertia('/politica-sgi', 'politica-sgi')->name('politicasgi');
 
@@ -52,7 +53,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'partnerLogosCount' => \App\Models\PartnerLogo::count(),
             'bannersCount' => \App\Models\Banner::count(),
             ],
-            'recentProducts' => \App\Models\Product::with(['category', 'brand'])
+            'recentProducts' => \App\Models\Product::with(['categories', 'brand'])
             ->latest()
             ->take(5)
             ->get(),

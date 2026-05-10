@@ -12,6 +12,7 @@ class ProductCategory extends Model
         'name',
         'slug',
         'icon',
+        'background_image',
         'banner_image',
         'banner_title',
         'banner_subtitle',
@@ -36,13 +37,13 @@ class ProductCategory extends Model
         });
     }
 
-    public function products(): HasMany
+    public function products(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(Product::class, 'category_id');
+        return $this->belongsToMany(Product::class, 'product_category_product', 'product_category_id', 'product_id');
     }
 
-    public function activeProducts(): HasMany
+    public function activeProducts(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(Product::class, 'category_id')->where('is_active', true)->orderBy('sort_order');
+        return $this->belongsToMany(Product::class, 'product_category_product', 'product_category_id', 'product_id')->where('is_active', true)->orderBy('sort_order');
     }
 }

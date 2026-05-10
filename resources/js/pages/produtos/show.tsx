@@ -42,7 +42,7 @@ interface Product {
   description: string | null;
   content_info: string | null;
   brand: Brand | null;
-  category: Category;
+  categories: Category[];
   documents: Document[];
 }
 

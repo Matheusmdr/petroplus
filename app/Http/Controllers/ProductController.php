@@ -33,7 +33,9 @@ class ProductController extends Controller
             ->where('is_active', true)
             ->firstOrFail();
 
-        $products = Product::where('category_id', $category->id)
+        $products = Product::whereHas('categories', function ($query) use ($category) {
+                $query->where('product_categories.id', $category->id);
+            })
             ->where('is_active', true)
             ->with('brand')
             ->orderBy('sort_order')
@@ -41,7 +43,9 @@ class ProductController extends Controller
 
         $brands = Brand::where('is_active', true)
             ->whereHas('products', function ($query) use ($category) {
-                $query->where('category_id', $category->id)->where('is_active', true);
+                $query->whereHas('categories', function ($q) use ($category) {
+                    $q->where('product_categories.id', $category->id);
+                })->where('is_active', true);
             })
             ->orderBy('sort_order')
             ->get();
@@ -63,9 +67,11 @@ class ProductController extends Controller
             ->firstOrFail();
 
         $product = Product::where('slug', $productSlug)
-            ->where('category_id', $category->id)
+            ->whereHas('categories', function ($query) use ($category) {
+                $query->where('product_categories.id', $category->id);
+            })
             ->where('is_active', true)
-            ->with(['brand', 'documents', 'category'])
+            ->with(['brand', 'documents', 'categories'])
             ->firstOrFail();
 
         return Inertia::render('produtos/show', [

@@ -39,9 +39,9 @@ class Product extends Model
         });
     }
 
-    public function category(): BelongsTo
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsTo(ProductCategory::class, 'category_id');
+        return $this->belongsToMany(ProductCategory::class, 'product_category_product', 'product_id', 'product_category_id');
     }
 
     public function brand(): BelongsTo

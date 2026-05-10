@@ -35,6 +35,7 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255',
             'icon' => 'nullable|image|max:2048',
             'banner_image' => 'nullable|image|max:2048',
+            'background_image' => 'nullable|image|max:2048',
             'banner_title' => 'nullable|string|max:255',
             'banner_subtitle' => 'nullable|string|max:255',
             'description' => 'nullable|string',
@@ -50,6 +51,10 @@ class CategoryController extends Controller
 
         if ($request->hasFile('banner_image')) {
             $validated['banner_image'] = $request->file('banner_image')->store('categories', 'public');
+        }
+
+        if ($request->hasFile('background_image')) {
+            $validated['background_image'] = $request->file('background_image')->store('categories/backgrounds', 'public');
         }
 
         ProductCategory::create($validated);
@@ -71,6 +76,7 @@ class CategoryController extends Controller
             'name' => 'required|string|max:255',
             'icon' => 'nullable|image|max:2048',
             'banner_image' => 'nullable|image|max:2048',
+            'background_image' => 'nullable|image|max:2048',
             'banner_title' => 'nullable|string|max:255',
             'banner_subtitle' => 'nullable|string|max:255',
             'description' => 'nullable|string',
@@ -92,6 +98,13 @@ class CategoryController extends Controller
                 Storage::disk('public')->delete($category->banner_image);
             }
             $validated['banner_image'] = $request->file('banner_image')->store('categories', 'public');
+        }
+
+        if ($request->hasFile('background_image')) {
+            if ($category->background_image) {
+                Storage::disk('public')->delete($category->background_image);
+            }
+            $validated['background_image'] = $request->file('background_image')->store('categories/backgrounds', 'public');
         }
 
         $category->update($validated);

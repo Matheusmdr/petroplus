@@ -162,6 +162,86 @@ Controller1c975247dece6664083dbdb674390436.form = Controller1c975247dece6664083d
 /**
 * @see \Inertia\Controller::__invoke
 * @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+const Controller109333381d9968d68e52fd40c34bffc1 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: Controller109333381d9968d68e52fd40c34bffc1.url(options),
+    method: 'get',
+})
+
+Controller109333381d9968d68e52fd40c34bffc1.definition = {
+    methods: ["get","head"],
+    url: '/pacote-de-valor',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+Controller109333381d9968d68e52fd40c34bffc1.url = (options?: RouteQueryOptions) => {
+    return Controller109333381d9968d68e52fd40c34bffc1.definition.url + queryParams(options)
+}
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+Controller109333381d9968d68e52fd40c34bffc1.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: Controller109333381d9968d68e52fd40c34bffc1.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+Controller109333381d9968d68e52fd40c34bffc1.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: Controller109333381d9968d68e52fd40c34bffc1.url(options),
+    method: 'head',
+})
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+const Controller109333381d9968d68e52fd40c34bffc1Form = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: Controller109333381d9968d68e52fd40c34bffc1.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+Controller109333381d9968d68e52fd40c34bffc1Form.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: Controller109333381d9968d68e52fd40c34bffc1.url(options),
+    method: 'get',
+})
+
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
+* @route '/pacote-de-valor'
+*/
+Controller109333381d9968d68e52fd40c34bffc1Form.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: Controller109333381d9968d68e52fd40c34bffc1.url({
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+Controller109333381d9968d68e52fd40c34bffc1.form = Controller109333381d9968d68e52fd40c34bffc1Form
+/**
+* @see \Inertia\Controller::__invoke
+* @see vendor/inertiajs/inertia-laravel/src/Controller.php:13
 * @route '/aviso-de-privacidade'
 */
 const Controller4dcb0c20ce0daa3565fac451619f64e5 = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -403,6 +483,7 @@ Controllere19ee86e9cf603ce1a59a1ec5d21dec5.form = Controllere19ee86e9cf603ce1a59
 const Controller = {
     '/sobre': Controlleree4f6b6c5996ace4f8e46adc93bf35d6,
     '/contato': Controller1c975247dece6664083dbdb674390436,
+    '/pacote-de-valor': Controller109333381d9968d68e52fd40c34bffc1,
     '/aviso-de-privacidade': Controller4dcb0c20ce0daa3565fac451619f64e5,
     '/politica-sgi': Controller2286f66b64d7b9420fbc4f8c6969ce66,
     '/settings/appearance': Controllere19ee86e9cf603ce1a59a1ec5d21dec5,

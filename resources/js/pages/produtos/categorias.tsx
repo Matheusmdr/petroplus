@@ -10,6 +10,7 @@ interface Category {
   slug: string;
   icon: string | null;
   banner_image: string | null;
+  background_image: string | null;
   banner_title: string | null;
   banner_subtitle: string | null;
   description: string | null;
@@ -299,18 +300,61 @@ export default function Page({ categories }: Props) {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-6"
+            className="grid grid-cols-2 gap-6 lg:grid-cols-3 lg:gap-8"
           >
             {categories.map((category) => (
               <motion.div variants={fadeUpVariant} key={category.id}>
                 <Link
                   href={`/produtos/${category.slug}`}
-                  className="group flex flex-col items-center gap-3"
+                  className="group flex w-full flex-col relative"
                 >
-                  <CategoryIcon category={category} />
-                  <span className="text-center text-sm font-semibold text-petroplus-orange transition-colors group-hover:text-orange-600 lg:text-xl lg:leading-relaxed">
-                    {category.name}
-                  </span>
+                  {/* MOBILE VIEW */}
+                  <div className="flex w-full flex-col items-center gap-3 lg:hidden">
+                    <CategoryIcon category={category} />
+                    <span className="text-center text-sm font-semibold text-petroplus-orange transition-colors group-hover:text-orange-600">
+                      {category.name}
+                    </span>
+                  </div>
+
+                  {/* DESKTOP VIEW */}
+                  <div className="hidden w-full items-center justify-center overflow-hidden rounded-2xl bg-gray-100 relative aspect-[16/9] lg:flex">
+                    {category.background_image ? (
+                      <img
+                        src={
+                          category.background_image.startsWith('http') ||
+                          category.background_image.startsWith('/')
+                            ? category.background_image
+                            : `/storage/${category.background_image}`
+                        }
+                        alt={category.name}
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-petroplus-orange/10 transition-opacity duration-500 group-hover:opacity-30"></div>
+                    )}
+                    
+                    <div className="absolute inset-0 bg-black/10 transition-colors duration-500 group-hover:bg-black/20"></div>
+
+                    <div className="z-10 flex items-center justify-center gap-4 rounded-full bg-black/60 py-2 pl-6 pr-2 backdrop-blur-sm border border-white/10 transition-colors duration-300 group-hover:bg-black/80">
+                      <span className="font-bold tracking-wider text-white">
+                        {category.name.toUpperCase()}
+                      </span>
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-petroplus-orange text-white">
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="3"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path d="M9 18l6-6-6-6" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
                 </Link>
               </motion.div>
             ))}

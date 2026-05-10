@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \App\Http\Controllers\Admin\ProductAdminController::destroy
-* @see app/Http/Controllers/Admin/ProductAdminController.php:189
+* @see app/Http/Controllers/Admin/ProductAdminController.php:201
 * @route '/admin/product-documents/{document}'
 */
 export const destroy = (args: { document: number | { id: number } } | [document: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -16,7 +16,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\Admin\ProductAdminController::destroy
-* @see app/Http/Controllers/Admin/ProductAdminController.php:189
+* @see app/Http/Controllers/Admin/ProductAdminController.php:201
 * @route '/admin/product-documents/{document}'
 */
 destroy.url = (args: { document: number | { id: number } } | [document: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
@@ -49,7 +49,7 @@ destroy.url = (args: { document: number | { id: number } } | [document: number |
 
 /**
 * @see \App\Http\Controllers\Admin\ProductAdminController::destroy
-* @see app/Http/Controllers/Admin/ProductAdminController.php:189
+* @see app/Http/Controllers/Admin/ProductAdminController.php:201
 * @route '/admin/product-documents/{document}'
 */
 destroy.delete = (args: { document: number | { id: number } } | [document: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -59,7 +59,7 @@ destroy.delete = (args: { document: number | { id: number } } | [document: numbe
 
 /**
 * @see \App\Http\Controllers\Admin\ProductAdminController::destroy
-* @see app/Http/Controllers/Admin/ProductAdminController.php:189
+* @see app/Http/Controllers/Admin/ProductAdminController.php:201
 * @route '/admin/product-documents/{document}'
 */
 const destroyForm = (args: { document: number | { id: number } } | [document: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -74,7 +74,7 @@ const destroyForm = (args: { document: number | { id: number } } | [document: nu
 
 /**
 * @see \App\Http\Controllers\Admin\ProductAdminController::destroy
-* @see app/Http/Controllers/Admin/ProductAdminController.php:189
+* @see app/Http/Controllers/Admin/ProductAdminController.php:201
 * @route '/admin/product-documents/{document}'
 */
 destroyForm.delete = (args: { document: number | { id: number } } | [document: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
