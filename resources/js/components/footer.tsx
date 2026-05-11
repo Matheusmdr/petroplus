@@ -1,20 +1,22 @@
 import React from 'react';
 import SocialIcons from './social-icons';
 import { usePage } from '@inertiajs/react';
+import { cn } from '@/lib/utils';
 
-const Footer: React.FC = () => {
+const Footer: React.FC<{ footerBg?: boolean }> = ({ footerBg = true }) => {
   const { socialLinks, sacPhone } = usePage<{
     socialLinks: {
       name: 'instagram' | 'facebook' | 'linkedin' | 'youtube';
       link: string;
     }[];
     sacPhone: string;
+
   }>().props;
 
   const imgPath = '/illust';
 
   return (
-    <footer className="animate-gradient flex w-full flex-col items-center bg-gradient-to-r from-petroplus-orange via-[#FD5B1D] to-petroplus-orange bg-[length:200%_auto] px-6 py-12 font-sans text-white">
+    <footer className={cn("animate-gradient flex w-full flex-col items-center bg-gradient-to-r from-petroplus-orange via-[#FD5B1D] to-petroplus-orange bg-[length:200%_auto] px-6 py-12 font-sans text-white", !footerBg && "bg-none")}>
       <div className="mx-auto w-[90%]">
         <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between lg:items-center">
           <div className="flex flex-col items-center gap-4 md:items-start">
